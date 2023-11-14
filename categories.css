@@ -74,12 +74,17 @@ header .image-text .name {
     transition: all 0.3s ease;
 }
 
+.sidebar ul{
+    padding: 0;
+  }
+
 .sidebar li{
   height: 50px;
   list-style: none;
   display: flex;
   align-items: center;
   margin-top: 10px;
+  padding: 0;
 }
 
 .sidebar .icon{
@@ -156,6 +161,7 @@ header .image-text .name {
     font-weight: 500;
     color: black;
     padding: 12px 60px;
+    background-color: #FFF;
 }
 
 .sidebar.close ~ .home{
@@ -163,3 +169,45 @@ header .image-text .name {
     height: 100vh;
     width: calc(100% - 88px);
 }
+
+.home .container {
+    width: 100%;
+	color: #FFFFFF;
+    height: calc(100vh - 69px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.home .container #main {
+	background: #FFF;
+	color: #000;
+	text-transform: uppercase;
+    border-radius: 5px;
+    width: 100%;
+    height: calc(100% - 60px);
+    overflow: scroll;
+    align-content: flex-start;
+    padding: 10px 20px;
+}
+
+.home .container #main table td,
+.home .container #main table th
+{
+    padding: 20px 40px;
+}
+
+
+.home .container #main table tbody tr {
+    border-top: 1px solid #EEEEEE;
+}
+
+.dropdown-toggle::after {
+    content: none;
+}
+
+table tbody tr td i {
+    color:#000;
+}
+
+
