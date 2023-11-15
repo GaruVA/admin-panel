@@ -172,7 +172,14 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan = 3><a href="#">+ Create New Category</a></td>
+                            <?php 
+                                if(isset($_GET['view'])) {
+                                    include('includes/categories_view.php');
+                                }
+                                if(isset($_GET['insert'])) {
+                                    include('includes/categories_insert.php');
+                                }
+                                ?>
                         </tr>
                     </tbody>
                 </table>

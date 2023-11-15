@@ -221,38 +221,63 @@ header .image-text .name {
     visibility: visible;
 }
 
-table tbody tr td i {
+tbody tr td i {
     color:#000;
 }
 
-table tbody tr:last-child {
+tbody tr:last-child {
     position: sticky;
     bottom: 0;
     background: #FFF;
     text-align: center;
 }
 
-table tbody tr:last-child td a {
+tbody tr:last-child td a {
     text-decoration: none;
     color: black;
 }
 
-table thead tr{
+thead tr{
     position: sticky;
     top: 0;
     background: #FFF;
 }
 
-table thead tr th {
+thead tr th {
     border-bottom: 1px solid #EEEEEE;
 }
 
-table tbody tr td {
+tbody tr td {
     border-top: 1px solid #EEEEEE;
 }
 
-table tbody tr:first-child td {
+tbody tr:first-child td {
     border-top: none;
 }
 
+form {
+    text-align: left;
+}
 
+form input {
+    width: 100%;
+    height: 41px;
+    border: none;
+    border-bottom: 1px solid black;
+}
+
+.hidden {
+    display: none;
+}
+
+.smbtn {
+    padding: 5px 15px;
+    border: 1px solid black;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.smbtn:hover {
+    cursor: pointer;
+    box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
+}
