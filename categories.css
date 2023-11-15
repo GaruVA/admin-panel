@@ -188,7 +188,12 @@ header .image-text .name {
     height: calc(100% - 60px);
     overflow: scroll;
     align-content: flex-start;
-    padding: 10px 20px;
+    padding: 0 20px;
+    position: relative;
+}
+
+.home .container #main table {
+    border-collapse: separate;
 }
 
 .home .container #main table td,
@@ -197,17 +202,59 @@ header .image-text .name {
     padding: 20px 40px;
 }
 
-
-.home .container #main table tbody tr {
-    border-top: 1px solid #EEEEEE;
-}
-
 .dropdown-toggle::after {
     content: none;
 }
 
+#main::-webkit-scrollbar{
+    width: 0.5rem;
+    height: 0.5rem;
+}
+
+#main::-webkit-scrollbar-thumb{
+    border-radius: .5rem;
+    background-color: #0004;
+    visibility: hidden;
+}
+
+#main:hover::-webkit-scrollbar-thumb{ 
+    visibility: visible;
+}
+
 table tbody tr td i {
     color:#000;
+}
+
+table tbody tr:last-child {
+    text-align: center;
+    position: sticky;
+    bottom: 0;
+    background: #FFF;
+    border-top: 1px solid #EEEEEE;
+}
+
+table tbody tr:last-child td a {
+    text-decoration: none;
+    color: black;
+}
+
+table thead tr{
+    position: sticky;
+    top: 0;
+    background: #FFF;
+    border-bottom: 1px solid #EEEEEE;
+}
+
+table thead tr th {
+    border-bottom: 1px solid #EEEEEE;
+}
+
+table tbody tr td {
+    border-top: 1px solid #EEEEEE;
+}
+
+table tbody tr:first-child td {
+    border-top: none;
 }
 
 
