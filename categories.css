@@ -226,11 +226,10 @@ table tbody tr td i {
 }
 
 table tbody tr:last-child {
-    text-align: center;
     position: sticky;
     bottom: 0;
     background: #FFF;
-    border-top: 1px solid #EEEEEE;
+    text-align: center;
 }
 
 table tbody tr:last-child td a {
@@ -242,7 +241,6 @@ table thead tr{
     position: sticky;
     top: 0;
     background: #FFF;
-    border-bottom: 1px solid #EEEEEE;
 }
 
 table thead tr th {
