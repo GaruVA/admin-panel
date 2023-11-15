@@ -171,6 +171,9 @@
                                 </div>
                             </td>
                         </tr>
+                        <tr>
+                            <td colspan = 3><a href="#">+ Create New Category</a></td>
+                        </tr>
                     </tbody>
                 </table>
                 
