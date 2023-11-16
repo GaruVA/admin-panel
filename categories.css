@@ -249,6 +249,7 @@ thead tr th {
 
 tbody tr td {
     border-top: 1px solid #EEEEEE;
+    height: 81px;
 }
 
 tbody tr:first-child td {
