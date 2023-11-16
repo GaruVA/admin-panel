@@ -46,7 +46,7 @@
                     </li>
 
                     <li class="nav-link">
-                        <a href="categories.php">
+                        <a href="categories.php?view">
                         <i class='bx bx-category icon' ></i>
                             <span class="text nav-text">Categories</span>
                         </a>
