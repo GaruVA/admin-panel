@@ -1,7 +1,16 @@
 <?php 
-    $con = mysqli_connect(host: "localhost", user: "root", password: "", database: "Assignment-Website");
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $db = "renthub";
 
-    if(!$con) {
-        echo "Connection Failed!";
-        exit();
+    $conn = mysqli_connect($servername, $username, $password);
+
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
     }
+
+    if (!mysqli_select_db($conn, $db)) {
+        die("Database does not exist: " . mysqli_error($conn));
+    }
+?>
