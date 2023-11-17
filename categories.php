@@ -97,7 +97,7 @@
                             include("includes/connection.php");
 
                             // Fetch categories from the database
-                            $sql_select_categories = "SELECT * FROM categories;";
+                            $sql_select_categories = "SELECT * FROM `categories`;";
                             $result_categories = mysqli_query($conn, $sql_select_categories);
 
                             // Check if there are categories to display
