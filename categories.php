@@ -39,7 +39,7 @@
                     </li>
 
                     <li class="nav-link">
-                        <a href="products.php">
+                        <a href="products.php?view">
                             <i class='bx bx-box icon' ></i>
                             <span class="text nav-text">Products</span>
                         </a>

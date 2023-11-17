@@ -39,7 +39,7 @@
                     </li>
 
                     <li class="nav-link">
-                        <a href="products.php">
+                        <a href="products.php?view">
                             <i class='bx bx-box icon' ></i>
                             <span class="text nav-text">Products</span>
                         </a>
@@ -82,6 +82,68 @@
 
     <section class="home">
         <div class="header"> Products</div>
+        <div class="container">
+            <div class="row" id="main">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Category</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                            include("includes/connection.php");
+
+                            // Fetch categories from the database
+                            $sql_select_categories = "SELECT * FROM `categories`;";
+                            $result_categories = mysqli_query($conn, $sql_select_categories);
+
+                            // Check if there are categories to display
+                            if (mysqli_num_rows($result_categories) > 0) {
+                                while ($category = mysqli_fetch_assoc($result_categories)) {
+                                    $category_id = $category['category_id'];
+                                    $category_name = $category['category_name'];
+
+                                    echo "<tr>
+                                            <td>$category_id</td>
+                                            <td>$category_name</td>
+                                            <td>
+                                                <div class='dropdown'>
+                                                    <a class='nav-link dropdown-toggle nav-center' href='#' id='navbarDarkDropdownMenuLink' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
+                                                        <i class='bx bx-dots-horizontal-rounded'></i>
+                                                    </a>
+                                                    <div class='dropdown-menu' aria-labelledby='navbarDarkDropdownMenuLink'>
+                                                        <a class='dropdown-item' href='#'>Edit</a>
+                                                        <a class='dropdown-item' href='#'>Delete</a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>";
+                                }
+                            } /*else {
+                                // Provide a message if there are no categories
+                                echo "<tr>
+                                        <td colspan='3'>No categories found.</td>
+                                      </tr>";
+                            }*/
+                        ?>
+                        <tr>
+                            <?php 
+                                if(isset($_GET['view'])) {
+                                    include('includes/products_view.php');
+                                }
+                                if(isset($_GET['insert'])) {
+                                    include('includes/products_insert.php');
+                                }
+                                ?>
+                        </tr>
+                    </tbody>
+                </table>
+                
+            </div>
+        </div>
     </section>
 
     <script>
