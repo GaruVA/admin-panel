@@ -230,6 +230,7 @@ tbody tr:last-child {
     bottom: 0;
     background: #FFF;
     text-align: center;
+    z-index: 2;
 }
 
 tbody tr:last-child td a {
@@ -241,6 +242,7 @@ thead tr{
     position: sticky;
     top: 0;
     background: #FFF;
+    z-index: 1;
 }
 
 thead tr th {
