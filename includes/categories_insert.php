@@ -21,17 +21,14 @@ if(isset($_POST["add"])){
     }
 }
 ?>
-
+<form method="post" action="">
 <td>
 </td>
 <td>
-    <form method="post" action="">
-        <input type="text" name="cat_name" placeholder=" Enter Category Name">
-        <input type="submit" id="submit-form" class="hidden" name="add">
-    </form>
+    <input type="text" name="cat_name" placeholder="Enter Category Name">
 </td>
 <td style="text-align: left;">
-    <label for="submit-form" tabindex="0" class="smbtn">Add</label>
+    <input type="submit" class="smbtn" name="add" value="Add">
 </td>
-
+</form>
 
