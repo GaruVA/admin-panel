@@ -22,6 +22,7 @@
     }
 ?>
 <form action="#" method="post" enctype="multipart/form-data" class="p-4">
+    <h2 class="mb-4">Create New Product</h2>
     <div class="row mb-3">
         <div class="col-md-4">
             <label for="productName" class="form-label">Product Name:</label>
