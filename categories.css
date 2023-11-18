@@ -173,10 +173,8 @@ header .image-text .name {
 .home .container {
     width: 100%;
 	color: #FFFFFF;
-    height: calc(100vh - 69px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    height: calc(100vh - 99px);
+    margin-top: 30px;
 }
 
 .home .container #main {
@@ -185,11 +183,12 @@ header .image-text .name {
 	text-transform: uppercase;
     border-radius: 5px;
     width: 100%;
-    height: calc(100% - 60px);
+    max-height: calc(100% - 30px);
     overflow: scroll;
     align-content: flex-start;
     padding: 0 20px;
     position: relative;
+    margin: 0;
 }
 
 .home .container #main table {
