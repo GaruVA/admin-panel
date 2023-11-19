@@ -3,6 +3,9 @@
         <tr>
             <th>ID</th>
             <th>Name</th>
+            <th>Image</th>
+            <th>Price</th>
+            <th>Status</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -10,17 +13,23 @@
         <?php
             include("includes/connection.php");
 
-            $sql_select_categories = "SELECT * FROM `products`;";
-            $result_categories = mysqli_query($conn, $sql_select_categories);
+            $sql_select_products = "SELECT * FROM `products`;";
+            $result_products = mysqli_query($conn, $sql_select_products);
 
-            if (mysqli_num_rows($result_categories) > 0) {
-                while ($category = mysqli_fetch_assoc($result_categories)) {
-                    $category_id = $category['category_id'];
-                    $category_name = $category['category_name'];
+            if (mysqli_num_rows($result_products) > 0) {
+                while ($product = mysqli_fetch_assoc($result_products)) {
+                    $product_id = $product['product_id'];
+                    $product_name = $product['product_name'];
+                    $product_image = $product['product_image1'];
+                    $product_price = $product['product_price'];
+                    $product_status = $product['status'];
 
                     echo "<tr>
-                            <td>$category_id</td>
-                            <td>$category_name</td>
+                            <td>$product_id</td>
+                            <td>$product_name</td>
+                            <td><img src='includes/product_images/$product_image' alt='$product_name' height='40px'></td>
+                            <td>$product_price</td>
+                            <td>$product_status</td>
                             <td>
                                 <div class='dropdown'>
                                     <a class='nav-link dropdown-toggle nav-center' href='#' id='navbarDarkDropdownMenuLink' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
@@ -42,9 +51,7 @@
             }*/
         ?>
         <tr>
-            <td></td>
-            <td><a href="products.php?insert">+ Create New Product</a></td>
-            <td></td>
+            <td colspan=6><a href="products.php?insert">+ Create New Product</a></td>
         </tr>
     </tbody>
 </table>
