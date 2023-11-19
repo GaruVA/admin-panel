@@ -1,6 +1,6 @@
 <?php
     include("connection.php");
-    if(isset($_POST["create"])){
+    if(isset($_POST["submit"])){
         $category_name = $_POST["category_name"];
 
         $sql_check_duplicate = "SELECT * FROM `categories` WHERE category_name='$category_name';";
@@ -27,6 +27,6 @@
             <label for="newCategory" class="form-label">Category Name:</label>
             <input type="text" id="newCategory" name="category_name" class="form-control" required>
         </div>
-        <button type="submit" name="create" class="btn btn-custom">Create Category</button>
+        <button type="submit" name="submit" class="btn btn-custom">Create Category</button>
 </form>
 
