@@ -2,7 +2,7 @@
     <thead>
         <tr>
             <th>ID</th>
-            <th>Category</th>
+            <th>Name</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -10,7 +10,7 @@
         <?php
             include("includes/connection.php");
 
-            $sql_select_categories = "SELECT * FROM `categories`;";
+            $sql_select_categories = "SELECT * FROM `products`;";
             $result_categories = mysqli_query($conn, $sql_select_categories);
 
             if (mysqli_num_rows($result_categories) > 0) {
