@@ -26,7 +26,7 @@
                 move_uploaded_file($product_tmpimage1, "C:/xampp/htdocs/Assignment-Website/admin_panel/includes/product_images/$product_image1");
                 move_uploaded_file($product_tmpimage2, "C:/xampp/htdocs/Assignment-Website/admin_panel/includes/product_images/$product_image2");
                 move_uploaded_file($product_tmpimage3, "C:/xampp/htdocs/Assignment-Website/admin_panel/includes/product_images/$product_image3");
-                $sql_insert_category = "INSERT INTO `products` (product_name,product_price,category_id,product_desc,product_image1,product_image2,product_image3,product_keywords,data,status) VALUES ('$product_name','$product_price','$product_category','$product_desc','$product_image1','$product_image2','$product_image3','$product_keywords',NOW(),'true');";
+                $sql_insert_category = "INSERT INTO `products` (product_name,product_price,category_id,product_desc,product_image1,product_image2,product_image3,product_keywords,date,status) VALUES ('$product_name','$product_price','$product_category','$product_desc','$product_image1','$product_image2','$product_image3','$product_keywords',NOW(),'true');";
                 $result_insert = mysqli_query($conn, $sql_insert_category);
 
                 if ($result_insert) {
