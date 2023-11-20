@@ -268,12 +268,13 @@ tbody tr:first-child td {
 }
 
 .btn-custom {
-    background-color: #F0F0F0; 
+    background-color: #000; 
     border-color: #000;
+    color: #EEEEEE;
     transition: all 0.3s ease;
 }
 
 .btn-custom:hover {
-    background-color: #FFF;
-    box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
+    color: #FFF;
+    box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.2);
 }
