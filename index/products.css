@@ -241,6 +241,10 @@ a, a:hover {
   gap: 3px;
 }
 
+.card .card__tagbox .tag__item:hover {
+  background: rgba(83, 83, 83, 0.8);
+}
+
 .card .card__tagbox .tag__item:nth-child(1) {
   margin-right: auto;
 }
