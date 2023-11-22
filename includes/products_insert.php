@@ -5,15 +5,11 @@
         $product_price = $_POST["product_price"];
         $product_category = $_POST["product_category"];
         $product_desc = $_POST["product_desc"];
-        $product_image1 = $_FILES["product_image1"]["name"];
-        $product_image2 = $_FILES["product_image2"]["name"];
-        $product_image3 = $_FILES["product_image3"]["name"];
-        $product_tmpimage1 = $_FILES["product_image1"]["tmp_name"];
-        $product_tmpimage2 = $_FILES["product_image2"]["tmp_name"];
-        $product_tmpimage3 = $_FILES["product_image3"]["tmp_name"];
+        $product_image = $_FILES["product_image"]["name"];
+        $product_tmpimage = $_FILES["product_image"]["tmp_name"];
         $product_keywords = $_POST["product_keywords"];
 
-        if($product_name == "" or $product_price == "" or $product_category == "" or $product_desc == "" or $product_image1 == "" or $product_image2 == "" or $product_image3 == "" or $product_keywords == ""){
+        if($product_name == "" or $product_price == "" or $product_category == "" or $product_desc == "" or $product_image == "" or $product_keywords == ""){
             echo "<script>alert('Error: Please fill all the avaiable fields.')</script>";
         } else {
             $sql_check_duplicate = "SELECT * FROM `products` WHERE product_name='$product_name';";
@@ -23,10 +19,8 @@
             if ($row_count != 0) {
                 echo "<script>alert('Error: This product already exists. Please choose a different product.')</script>";
             } else {
-                move_uploaded_file($product_tmpimage1, "C:/xampp/htdocs/Assignment-Website/admin_panel/includes/product_images/$product_image1");
-                move_uploaded_file($product_tmpimage2, "C:/xampp/htdocs/Assignment-Website/admin_panel/includes/product_images/$product_image2");
-                move_uploaded_file($product_tmpimage3, "C:/xampp/htdocs/Assignment-Website/admin_panel/includes/product_images/$product_image3");
-                $sql_insert_category = "INSERT INTO `products` (product_name,product_price,category_id,product_desc,product_image1,product_image2,product_image3,product_keywords,date,status) VALUES ('$product_name','$product_price','$product_category','$product_desc','$product_image1','$product_image2','$product_image3','$product_keywords',NOW(),'true');";
+                move_uploaded_file($product_tmpimage, "C:/xampp/htdocs/Assignment-Website/admin_panel/includes/product_images/$product_image");
+                $sql_insert_category = "INSERT INTO `products` (product_name,product_price,category_id,product_desc,product_image,product_keywords,date,status) VALUES ('$product_name','$product_price','$product_category','$product_desc','$product_image','$product_keywords',NOW(),'true');";
                 $result_insert = mysqli_query($conn, $sql_insert_category);
 
                 if ($result_insert) {
@@ -78,21 +72,9 @@
         <textarea id="description" name="product_desc" rows="4" class="form-control" required></textarea>
     </div>
 
-    <div class="row mb-3">
-        <div class="col-md-6">
-            <label for="image1" class="form-label">Image 1:</label>
-            <input type="file" id="image1" name="product_image1" class="form-control" accept="image/*" required>
-        </div>
-
-        <div class="col-md-6">
-            <label for="image2" class="form-label">Image 2:</label>
-            <input type="file" id="image2" name="product_image2" class="form-control" accept="image/*" required>
-        </div>
-    </div>
-
     <div class="mb-3">
-        <label for="image3" class="form-label">Image 3:</label>
-        <input type="file" id="image3" name="product_image3" class="form-control" accept="image/*" required>
+        <label for="image" class="form-label">Image:</label>
+        <input type="file" id="image" name="product_image" class="form-control" accept="image/*" required>
     </div>
 
     <div class="mb-3">

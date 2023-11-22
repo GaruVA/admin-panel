@@ -20,7 +20,7 @@
                 while ($product = mysqli_fetch_assoc($result_products)) {
                     $product_id = $product['product_id'];
                     $product_name = $product['product_name'];
-                    $product_image = $product['product_image1'];
+                    $product_image = $product['product_image'];
                     $product_price = $product['product_price'];
                     $product_status = $product['status'];
 
