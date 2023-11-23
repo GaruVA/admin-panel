@@ -34,13 +34,11 @@
           <li class="nav-item"><a class="nav-link nav-center" href="#">About</a></li>
           <li class="nav-item"><a class="nav-link nav-center" href="Contact.html">Contact</a></li>
         </ul>
-        <div class="nav-link nav-center">
-
-          <from action="">
-            <input type="search" placeholder="Search...">
-          </from>
+        <div class="nav-link nav-center right">
+          <form action="" method="get">
+            <input type="search" name="search_product" placeholder="Search..." autocomplete="off">
+          </form>
           <a class="nav-icon"><i class="far fa-user" style="color: #f4f0f0;"></i></a>
-          
         </div>
       </div>
     </div>
@@ -76,7 +74,7 @@
   <div class = "container">
             <?php
               include("admin_panel/includes/connection.php");
-              if(!isset($_GET["category"])){
+              if(!isset($_GET["category"]) && !isset($_GET["search_product"])){
                 $sql_select_categories = "SELECT * FROM `categories`;";
                 $result_categories = mysqli_query($conn, $sql_select_categories);
 
@@ -124,7 +122,7 @@
                       }
                     }
                 }
-              } else {
+              } elseif(isset($_GET["category"])) {
                 $category_id = $_GET["category"];
                 $sql_select_categories = "SELECT * FROM `categories` WHERE category_id=$category_id;";
                 $sql_select_products = "SELECT * FROM `products` WHERE category_id=$category_id;";
@@ -166,6 +164,44 @@
                   </article>";
                   }
               }
+              } else {
+                $search_product = $_GET["search_product"];
+                $sql_select_products = "SELECT * FROM `products` WHERE product_keywords like '%$search_product%';";
+                $result_products = mysqli_query($conn, $sql_select_products);
+
+                if (mysqli_num_rows($result_products) > 0) {
+                  echo "<h1 class='h1 text-center text-dark pageHeaderTitle'>Seached for: $search_product</h1>";
+                  while ($product = mysqli_fetch_assoc($result_products)) {
+                      $product_id = $product['product_id'];
+                      $product_name = $product['product_name'];
+                      $product_image = $product['product_image'];
+                      $product_price = $product['product_price'];
+                      $product_desc = $product['product_desc'];
+                      $product_status = $product['status'];
+  
+                      echo "<article class='card dark blue'>
+                      <a class='card__img_link' href='#'>
+                          <img class='card__img' src='admin_panel/includes/product_images/$product_image' alt=$product_name />
+                      </a>
+                      <div class='card__text'>
+                          <h1 class='card__title blue'><a href='#'>$product_name</a></h1>
+                          
+                          <div class='card__bar'></div>
+                          <div class='card__preview-txt'>$product_desc</div>
+                          <ul class='card__tagbox'>
+                              <li class='tag__item'><i class='fas fa-tag mr-2'></i>$$product_price/hr</li>
+                              <li class='tag__item'>
+                              <button onclick='decrementQuantity($product_id)'>-</button>
+                              <input type='number' id=$product_id name=$product_id min='1' value='1'>
+                              <button onclick='incrementQuantity($product_id)'>+</button>
+                              <li class='tag__item play blue'>
+                                  <a href='#'><i class='fa-solid fa-cart-shopping'></i> Add to cart</a>
+                              </li>
+                          </ul>
+                      </div>
+                  </article>";
+                  }
+                }
               }
             ?> 
   </div>

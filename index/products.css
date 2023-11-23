@@ -80,10 +80,16 @@ position: relative;
   margin-top: 10px;
 }
 
+.nav-link.nav-center.right {
+  display: flex;
+  justify-content: center;
+}
+
 input[type=search]{
   width: 40px;
   height: 38px;
-  padding: 8px 20px 8px 45px;
+  padding: 8px 20px 8px 20px;
+  margin-right: 25px;
   border: #fff solid 2px;
   font-size: 18px;
   border-radius: 25px;
