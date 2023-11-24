@@ -170,7 +170,7 @@
                 $result_products = mysqli_query($conn, $sql_select_products);
 
                 if (mysqli_num_rows($result_products) > 0) {
-                  echo "<h1 class='h1 text-center text-dark pageHeaderTitle'>Seached for: $search_product</h1>";
+                  echo "<h1 class='h1 text-center text-dark pageHeaderTitle'>Searched for: $search_product</h1>";
                   while ($product = mysqli_fetch_assoc($result_products)) {
                       $product_id = $product['product_id'];
                       $product_name = $product['product_name'];
