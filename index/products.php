@@ -56,7 +56,17 @@
           <form action="" method="get">
             <input type="search" name="search_product" placeholder="Search..." autocomplete="off">
           </form>
-          <a class="nav-icon"><i class="fa-solid fa-cart-shopping px-3" style="color: #f4f0f0;"></i><div class="cart-number">1</div></a>
+          <a class="nav-icon">
+            <i class="fa-solid fa-cart-shopping px-3" style="color: #f4f0f0;"></i>
+            <div class="cart-number">
+              <?php
+                $ip_address = getIPAddress();
+                $sql_select_cart = "SELECT * FROM `cart` WHERE ip_address='$ip_address';";
+                $result_select_cart = mysqli_query($conn, $sql_select_cart);
+                echo mysqli_num_rows($result_select_cart);
+              ?>
+            </div>
+          </a>
           <a class="nav-icon"><i class="fa-solid fa-user" style="color: #f4f0f0;"></i></a>
         </div>
       </div>
