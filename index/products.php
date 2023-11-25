@@ -238,7 +238,11 @@
                 $result_select_cart = mysqli_query($conn, $sql_select_cart);
         
                 if (mysqli_num_rows($result_select_cart) > 0) {
-                    echo "<script>alert('This item is already present inside the cart')</script>";
+                    $cart = mysqli_fetch_assoc($result_select_cart);
+                    $cart_quantity = $cart["quantity"];
+                    $new_quantity = $cart_quantity + $quantity;
+                    $sql_update_cart = "UPDATE `cart` SET quantity=$new_quantity WHERE ip_address='$ip_address' AND product_id=$product_id;";
+                    $result_update_cart = mysqli_query($conn, $sql_update_cart);
                 } else {
                     $sql_insert_cart = "INSERT INTO `cart` (product_id,ip_address,quantity) VALUES ($product_id,'$ip_address',$quantity);";
                     $result_insert_cart = mysqli_query($conn, $sql_insert_cart);
