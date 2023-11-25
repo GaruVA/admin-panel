@@ -89,7 +89,6 @@ input[type=search]{
   width: 40px;
   height: 38px;
   padding: 8px 20px 8px 20px;
-  margin-right: 25px;
   border: #fff solid 2px;
   font-size: 18px;
   border-radius: 25px;
@@ -258,6 +257,11 @@ a, a:hover {
 .card .card__tagbox .blue.play {
   background-color: #00ADB5;
   color: black;
+  cursor: pointer;
+}
+
+.card .card__tagbox .blue.play label{
+  cursor: pointer;
 }
 
 .tag__item input {

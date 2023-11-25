@@ -1,3 +1,21 @@
+<?php 
+    include("admin_panel/includes/connection.php");
+
+    function getIPAddress() {  
+       if(!empty($_SERVER['HTTP_CLIENT_IP'])) {  
+                  $ip = $_SERVER['HTTP_CLIENT_IP'];  
+          }  
+
+      elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {  
+                  $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];  
+       }  
+      else{  
+               $ip = $_SERVER['REMOTE_ADDR'];  
+       }  
+       return $ip;  
+    } 
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,7 +56,8 @@
           <form action="" method="get">
             <input type="search" name="search_product" placeholder="Search..." autocomplete="off">
           </form>
-          <a class="nav-icon"><i class="far fa-user" style="color: #f4f0f0;"></i></a>
+          <a class="nav-icon"><i class="fa-solid fa-cart-shopping px-3" style="color: #f4f0f0;"></i></a>
+          <a class="nav-icon"><i class="fa-solid fa-user" style="color: #f4f0f0;"></i></a>
         </div>
       </div>
     </div>
@@ -49,8 +68,6 @@
         <ul class="navbar-nav mx-auto">
         <li class='nav-item'><a class='nav-link nav-center' href='products.php'>All</a></li>
           <?php
-              include("admin_panel/includes/connection.php");
-
               $sql_select_categories = "SELECT * FROM `categories`;";
               $result_categories = mysqli_query($conn, $sql_select_categories);
 
@@ -110,10 +127,13 @@
                                       <li class='tag__item'><i class='fas fa-tag mr-2'></i>$$product_price/hr</li>
                                       <li class='tag__item'>
                                       <button onclick='decrementQuantity($product_id)'>-</button>
-                                      <input type='number' id=$product_id name=$product_id min='1' value='1'>
+                                      <form>
+                                      <input type='submit' id='submit$product_id' name='cart' value='$product_id' style='display: none'>
+                                      <input type='number' id='$product_id' name='quantity' min='1' value='1'>
+                                      </form>
                                       <button onclick='incrementQuantity($product_id)'>+</button>
                                       <li class='tag__item play blue'>
-                                          <a href='#'><i class='fa-solid fa-cart-shopping'></i> Add to cart</a>
+                                          <label for='submit$product_id'><i class='fa-solid fa-cart-shopping'></i> Add to cart</label>
                                       </li>
                                   </ul>
                               </div>
@@ -154,17 +174,20 @@
                               <li class='tag__item'><i class='fas fa-tag mr-2'></i>$$product_price/hr</li>
                               <li class='tag__item'>
                               <button onclick='decrementQuantity($product_id)'>-</button>
-                              <input type='number' id=$product_id name=$product_id min='1' value='1'>
+                              <form>
+                              <input type='submit' id='submit$product_id' name='cart' value='$product_id' style='display: none'>
+                              <input type='number' id='$product_id' name='quantity' min='1' value='1'>
+                              </form>
                               <button onclick='incrementQuantity($product_id)'>+</button>
                               <li class='tag__item play blue'>
-                                  <a href='#'><i class='fa-solid fa-cart-shopping'></i> Add to cart</a>
+                                  <label for='submit$product_id'><i class='fa-solid fa-cart-shopping'></i> Add to cart</label>
                               </li>
                           </ul>
                       </div>
                   </article>";
                   }
               }
-              } else {
+              } elseif(isset($_GET["search_product"])) {
                 $search_product = $_GET["search_product"];
                 $sql_select_products = "SELECT * FROM `products` WHERE product_keywords like '%$search_product%';";
                 $result_products = mysqli_query($conn, $sql_select_products);
@@ -192,17 +215,40 @@
                               <li class='tag__item'><i class='fas fa-tag mr-2'></i>$$product_price/hr</li>
                               <li class='tag__item'>
                               <button onclick='decrementQuantity($product_id)'>-</button>
-                              <input type='number' id=$product_id name=$product_id min='1' value='1'>
+                              <form>
+                              <input type='submit' id='submit$product_id' name='cart' value='$product_id' style='display: none'>
+                              <input type='number' id='$product_id' name='quantity' min='1' value='1'>
+                              </form>
                               <button onclick='incrementQuantity($product_id)'>+</button>
                               <li class='tag__item play blue'>
-                                  <a href='#'><i class='fa-solid fa-cart-shopping'></i> Add to cart</a>
+                                  <label for='submit$product_id'><i class='fa-solid fa-cart-shopping'></i> Add to cart</label>
                               </li>
                           </ul>
                       </div>
                   </article>";
                   }
                 }
-              }
+              }  
+              
+              if(isset($_GET['cart']) && isset($_GET['quantity'])) {
+                $ip_address = getIPAddress();
+                $product_id = $_GET['cart'];
+                $quantity = $_GET['quantity'];
+                $sql_select_cart = "SELECT * FROM `cart` WHERE ip_address='$ip_address' AND product_id=$product_id;";
+                $result_select_cart = mysqli_query($conn, $sql_select_cart);
+        
+                if (mysqli_num_rows($result_select_cart) > 0) {
+                    echo "<script>alert('This item is already present inside the cart')</script>";
+                } else {
+                    $sql_insert_cart = "INSERT INTO `cart` (product_id,ip_address,quantity) VALUES ($product_id,'$ip_address',$quantity);";
+                    $result_insert_cart = mysqli_query($conn, $sql_insert_cart);
+                }
+        
+                $referrer = $_SERVER['HTTP_REFERER'];
+        
+                echo "<script>window.location.href = '$referrer';</script>";
+                exit;
+            }
             ?> 
   </div>
   </div>
