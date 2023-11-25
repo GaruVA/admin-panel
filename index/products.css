@@ -29,10 +29,25 @@ body {
 
 .nav-icon{
   align-items: center;
+  position: relative;
 }
 .nav-icon i {
   margin-right: 5px;
   padding: 10px;
+}
+
+.nav-icon .cart-number {
+  position: absolute;
+  top:0;
+  right: 0;
+  height: 18px;
+  width: 18px;
+  font-size: 10px;
+  color: black;
+  margin: 0 8px;
+  border-radius: 100%;
+  border: 2px solid #222831;
+  background: #f4f0f0;
 }
 
 .nav-center{

@@ -56,7 +56,7 @@
           <form action="" method="get">
             <input type="search" name="search_product" placeholder="Search..." autocomplete="off">
           </form>
-          <a class="nav-icon"><i class="fa-solid fa-cart-shopping px-3" style="color: #f4f0f0;"></i></a>
+          <a class="nav-icon"><i class="fa-solid fa-cart-shopping px-3" style="color: #f4f0f0;"></i><div class="cart-number">1</div></a>
           <a class="nav-icon"><i class="fa-solid fa-user" style="color: #f4f0f0;"></i></a>
         </div>
       </div>
