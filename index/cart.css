@@ -1,0 +1,270 @@
+/* font-family: 'Tilt Neon', sans-serif; */
+@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Tilt+Neon&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Tilt Neon', sans-serif;
+}
+
+body {
+    font-family: 'Tilt Neon', sans-serif;
+    font-size: 16px;
+    color: #ffffff;
+    text-rendering: optimizeLegibility;
+    font-weight: initial;
+    background-color: #EEEEEE;
+}
+
+
+.navbar-custom{
+    background-color: #222831;
+    opacity: 0.99;
+}
+
+.collapse{
+    color: white;
+}
+
+.nav-icon{
+    align-items: center;
+    position: relative;
+    margin: 7px 20px;
+}
+
+.nav-icon .cart-number {
+    position: absolute;
+    top:0;
+    right: 0;
+    height: 18px;
+    width: 18px;
+    font-size: 10px;
+    color: black;
+    margin: -8px -12px;
+    border-radius: 100%;
+    border: 2px solid #222831;
+    background: #f4f0f0;
+}
+
+.nav-center{
+    text-align: center;
+}
+
+.nav-item{
+    padding: 10px;
+}
+
+.nav-item:hover .nav-link{
+    color: #00adb5 !important;
+}
+
+.nav-link{
+    color: #f9f4f4 !important;
+    font-weight: 500;
+    transition: all 200ms linear;
+}
+.nav-item:after{
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    content: '';
+    background-color: #00adb5;
+    opacity: 0;
+    transition: all 200ms linear;
+}
+.nav-item:hover:after{
+    bottom: 0;
+    opacity: 2;
+}
+
+.nav-item.active:hover:after{
+    opacity: 0;
+}
+.nav-item{
+    position: relative;
+    transition: all 200ms linear;
+}
+
+.nav-link.nav-center.right {
+    display: flex;
+    justify-content: center;
+}
+
+input[type=search]{
+    width: 40px;
+    height: 38px;
+    padding: 8px 20px 8px 20px;
+    border: #fff solid 2px;
+    font-size: 18px;
+    border-radius: 25px;
+    background-position: 2% 50%;
+    background-repeat: no-repeat;
+    background-size: 20px;
+    background-image: url('image/search.png');
+    background-color: transparent;
+    transition: 0.5s all ease-in-out;
+    filter: brightness(170%);
+    border: none;
+}
+
+input[type=search]:focus,
+input[type=search]:not(:placeholder-shown){
+    width: 350px;
+    background-color: #fff;
+    filter: brightness(100%);
+}
+
+/* footer */
+.list-inline-item .btn-floating {
+    font-size: 23px;
+}
+
+.footerbg {
+    background-color: #222831;
+}
+
+.home{
+    margin-top: 106px;
+    margin-bottom: 30px;
+    height: calc(100vh - 136px);
+    width: 100%;
+    background-color: #EEEEEE;
+    transition: all 0.3s ease;
+}
+
+.home .container {
+    width: 100%;
+    color: #FFFFFF;
+    height: 100%;
+}
+
+.home .container #main {
+    background: #FFF;
+    color: #000;
+    text-transform: uppercase;
+    border-radius: 5px;
+    width: 100%;
+    max-height: calc(100vh - 136px);
+    overflow: scroll;
+    align-content: flex-start;
+    padding: 0 20px;
+    position: relative;
+    margin: 0;
+}
+
+.home .container #main table {
+    border-collapse: separate;
+}
+
+.home .container #main table td,
+.home .container #main table th
+{
+    padding: 20px 0px;
+    white-space: nowrap;
+
+}
+
+.dropdown-toggle::after {
+    content: none;
+}
+
+#main::-webkit-scrollbar{
+    width: 0.5rem;
+    height: 0.5rem;
+}
+
+#main::-webkit-scrollbar-thumb{
+    border-radius: .5rem;
+    background-color: #0004;
+    visibility: hidden;
+}
+
+#main:hover::-webkit-scrollbar-thumb{ 
+    visibility: visible;
+}
+
+tbody tr td i {
+    color:#000;
+}
+
+tbody tr:last-child {
+    position: sticky;
+    bottom: 0;
+    background: #FFF;
+    text-align: center;
+    z-index: 2;
+}
+
+tbody tr:last-child td a {
+    text-decoration: none;
+    color: black;
+}
+
+thead tr{
+    position: sticky;
+    top: 0;
+    background: #FFF;
+    z-index: 1;
+}
+
+thead tr th {
+    border-bottom: 1px solid #EEEEEE;
+}
+
+tbody tr td {
+    border-top: 1px solid #EEEEEE;
+    height: 81px;
+}
+
+tbody tr:first-child td {
+    border-top: none;
+}
+
+.form-control:focus {
+    border-color: #ced4da;
+    box-shadow: none;
+}
+
+.form-select:focus {
+    border-color: #ced4da; 
+    box-shadow: none;
+}
+
+.price {
+    margin-top: -5px;
+    display: inline-block;
+    padding: 0 10px;
+    font-size: 20px;
+}
+
+.btn-custom {
+    background-color: #000; 
+    border-color: #000;
+    color: #EEEEEE;
+    transition: all 0.3s ease;
+}
+
+.btn-custom:hover {
+    color: #FFF;
+    box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.2);
+}
+
+td input {
+  padding: 0 8px;
+  font-size: 16px;
+  width: 50px;
+  text-align: center;
+  background-color: #EEEEEE;
+  border-radius: 3px;
+}
+
+td button {
+  padding: 1px 8px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+}

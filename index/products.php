@@ -48,7 +48,7 @@
       <div class="collapse navbar-collapse" id="navbarID">
         <ul class="navbar-nav mx-auto">
           <li class="nav-item"><a class="nav-link active nav-center" aria-current="page" href="#">Home</a></li>
-          <li class="nav-item"><a class="nav-link nav-center" href="#">Products</a></li>
+          <li class="nav-item"><a class="nav-link nav-center" href="products.php">Products</a></li>
           <li class="nav-item"><a class="nav-link nav-center" href="#">About</a></li>
           <li class="nav-item"><a class="nav-link nav-center" href="Contact.html">Contact</a></li>
         </ul>
@@ -134,7 +134,7 @@
                                   <div class='card__bar'></div>
                                   <div class='card__preview-txt'>$product_desc</div>
                                   <ul class='card__tagbox'>
-                                      <li class='tag__item'><i class='fas fa-tag mr-2'></i>$$product_price/hr</li>
+                                      <li class='tag__item'><i class='fas fa-tag mr-2'></i>$$product_price/day</li>
                                       <li class='tag__item'>
                                       <button onclick='decrementQuantity($product_id)'>-</button>
                                       <form>
@@ -181,7 +181,7 @@
                           <div class='card__bar'></div>
                           <div class='card__preview-txt'>$product_desc</div>
                           <ul class='card__tagbox'>
-                              <li class='tag__item'><i class='fas fa-tag mr-2'></i>$$product_price/hr</li>
+                              <li class='tag__item'><i class='fas fa-tag mr-2'></i>$$product_price/day</li>
                               <li class='tag__item'>
                               <button onclick='decrementQuantity($product_id)'>-</button>
                               <form>
@@ -222,7 +222,7 @@
                           <div class='card__bar'></div>
                           <div class='card__preview-txt'>$product_desc</div>
                           <ul class='card__tagbox'>
-                              <li class='tag__item'><i class='fas fa-tag mr-2'></i>$$product_price/hr</li>
+                              <li class='tag__item'><i class='fas fa-tag mr-2'></i>$$product_price/day</li>
                               <li class='tag__item'>
                               <button onclick='decrementQuantity($product_id)'>-</button>
                               <form>
