@@ -125,7 +125,7 @@
                               </a>
                               <div class='dropdown-menu' aria-labelledby='navbarDarkDropdownMenuLink'>
                                   <a class='dropdown-item' href='#'>Edit</a>
-                                  <a class='dropdown-item' href='#'>Delete</a>
+                                  <a class='dropdown-item' href='cart.php?delete=$product_id'>Delete</a>
                               </div>
                           </div>
                       </td>
@@ -137,11 +137,18 @@
                 $quantity = $_GET['quantity'];
                 $sql_update_cart = "UPDATE `cart` SET quantity=$quantity WHERE ip_address='$ip_address' AND product_id=$product_id;";
                 $result_update_cart = mysqli_query($conn, $sql_update_cart);
-        
-                $referrer = $_SERVER['HTTP_REFERER'];
-                echo "<script>window.location.href = '$referrer';</script>";
+                echo "<script>window.location.href = 'cart.php';</script>";
                 exit;
             }
+
+            if(isset($_GET['delete'])) {
+              $product_id = $_GET['delete'];
+              $sql_delete_cart = "DELETE FROM `cart` WHERE ip_address = '$ip_address' AND product_id = $product_id;";
+              $result_update_cart = mysqli_query($conn, $sql_delete_cart);
+              echo "<script>window.location.href = 'cart.php';</script>";
+              exit;
+          }
+
         ?>
         
         <tr>
