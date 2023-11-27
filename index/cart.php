@@ -118,16 +118,8 @@
                       </form>
                       </td>
                       <td>$$product_price_quantity</td>
-                      <td>
-                          <div class='dropdown'>
-                              <a class='nav-link dropdown-toggle nav-center' href='#' id='navbarDarkDropdownMenuLink' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
-                                  <i class='bx bx-dots-horizontal-rounded'></i>
-                              </a>
-                              <div class='dropdown-menu' aria-labelledby='navbarDarkDropdownMenuLink'>
-                                  <a class='dropdown-item' href='#'>Edit</a>
-                                  <a class='dropdown-item' href='cart.php?delete=$product_id'>Delete</a>
-                              </div>
-                          </div>
+                      <td style='text-align:center'>
+                          <a href='cart.php?delete=$product_id'><i class='fa-solid fa-trash' style='color: #393E46;'></i></a>
                       </td>
                     </tr>";
             }	
