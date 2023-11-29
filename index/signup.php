@@ -1,4 +1,5 @@
 <?php 
+    session_start();
     include("admin_panel/includes/connection.php");
 
     function getIPAddress() {  
@@ -81,8 +82,8 @@
         <h1>Sign Up</h1>
         <form action="" method="POST" enctype="multipart/form-data">
           <div class="input-field">
-            <input type="text" id="user_username" placeholder=" " required="required" name="user_username">
-            <label for="user_username" class="form-label">Username</label>
+            <input type="text" id="user_name" placeholder=" " required="required" name="user_name">
+            <label for="user_name" class="form-label">Username</label>
           </div> 
           <div class="input-field">
             <input type="email" name="user_email" id="user_email" placeholder=" " required="required">
@@ -161,15 +162,16 @@
 <!--php code-->
 <?php
 if(isset($_POST['signup'])){
-  $user_username = $_POST['user_username'];
+  $user_name = $_POST['user_name'];
   $user_email = $_POST['user_email'];
   $user_password = $_POST['user_password'];
+  $user_password_hash = password_hash($user_password, PASSWORD_DEFAULT);
   $conf_user_password = $_POST['conf_user_password'];
   $user_address = $_POST['user_address'];
   $user_contact = $_POST['user_contact'];
 
   //select query
-  $select_query="Select * from 'user_table' where username='$user_username' or user_email='$user_email'";
+  $select_query="SELECT * FROM `users` WHERE user_name='$user_name' OR user_email='$user_email'";
   $result=mysqli_query($conn,$select_query);
   $rows_count=mysqli_num_rows($result);
   if($rows_count>0){
@@ -178,10 +180,18 @@ if(isset($_POST['signup'])){
     echo "<script>alert('Password does not match')</script>";
   }else{
     //insert_query
-    $insert_query="insert into 'user_table' (username,user_email,user_password,user_address,user_contact) values ('$user_username','$user_email','$user_password','$user_address','$user_contact')";
+    $insert_query="INSERT INTO `users` (user_name,user_email,user_password,user_address,user_contact,user_ip) VALUES ('$user_name','$user_email','$user_password_hash','$user_address','$user_contact','$ip_address')";
     $sql_execute=mysqli_query($conn,$insert_query);
+    $_SESSION['user_name']=$user_name;
+    $sql_select_cart="SELECT * FROM `cart` WHERE ip_address='$ip_address'";
+    $result_select_cart=mysqli_query($conn,$sql_select_cart);
+    if(mysqli_num_rows($result_select_cart) > 0){
+      echo "<script>alert('You have items in your cart')</script>";
+      echo "<script>window.open('cart.php','_self')</script>";
+    }else{
+      echo "<script>window.open('products.php', '_self')</script>";
+    }
   }
-
 }
 
 ?> 
