@@ -165,8 +165,8 @@ if(isset($_POST['signup'])){
   $user_name = $_POST['user_name'];
   $user_email = $_POST['user_email'];
   $user_password = $_POST['user_password'];
-  $user_password_hash = password_hash($user_password, PASSWORD_DEFAULT);
   $conf_user_password = $_POST['conf_user_password'];
+  $user_password_hash = password_hash($conf_user_password, PASSWORD_DEFAULT);
   $user_address = $_POST['user_address'];
   $user_contact = $_POST['user_contact'];
 
