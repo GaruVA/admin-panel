@@ -1,4 +1,5 @@
-<?php 
+<?php
+    session_start();
     include("admin_panel/includes/connection.php");
 
     function getIPAddress() {  
@@ -80,10 +81,10 @@
       </div>
       <div class="col-md-6" id="right">
         <h1>Login In</h1>
-        <form action="Contact.php" method="POST">
+        <form action="" method="POST">
         <div class="input-field">
-            <input type="text" id="user_username" placeholder=" " required="required" name="user_username">
-            <label for="user_username" class="form-label">Username</label>
+            <input type="text" id="user_name" placeholder=" " required="required" name="user_name">
+            <label for="user_name" class="form-label">Username</label>
           </div> 
           <div class="input-field">
             <input type="password" name="conf_user_password" id="conf_user_password" placeholder=" " required="required">
@@ -170,3 +171,34 @@
 <script src="login.js"></script>
 </body>
 </html>
+
+<?php
+if(isset($_POST["login"])) {
+  $user_name=$_POST["user_name"];
+  $conf_user_password=$_POST["conf_user_password"];
+
+  $sql_select_user="SELECT * FROM `users` WHERE user_name='$user_name';";
+  $result_select_user=mysqli_query($conn, $sql_select_user);
+  if(mysqli_num_rows($result_select_user) > 0) {
+    $row_select_user = mysqli_fetch_assoc($result_select_user);
+    $password=$row_select_user['user_password'];
+    if(password_verify($conf_user_password, $password)) {
+      $_SESSION['user_name']=$user_name;
+      echo "<script>alert('Login Successful')</script>";
+      $sql_select_cart="SELECT * FROM `cart` WHERE ip_address='$ip_address'";
+      $result_select_cart=mysqli_query($conn,$sql_select_cart);
+      if(mysqli_num_rows($result_select_cart) > 0){
+        echo "<script>alert('You have items in your cart')</script>";
+        echo "<script>window.open('cart.php','_self')</script>";
+      }else{
+        echo "<script>window.open('products.php', '_self')</script>";
+      }
+    }else{
+      echo "<script>alert('Invalid Credentials')</script>";
+    } 
+  }else{
+    echo "<script>alert('Invalid Credentials')</script>";
+  } 
+
+}
+?>
