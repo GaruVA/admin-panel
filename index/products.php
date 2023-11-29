@@ -1,4 +1,5 @@
-<?php 
+<?php
+    session_start();
     include("admin_panel/includes/connection.php");
 
     function getIPAddress() {  
@@ -67,7 +68,14 @@
               ?>
             </div>
           </a>
-          <a href="#" class="nav-icon"><i class="fa-solid fa-user" style="color: #f4f0f0;"></i></a>
+          <?php
+            if(!isset($_SESSION['user_name'])) {
+              echo "<a href='login.php' class='nav-icon'>";
+            }else{
+              echo "<a href='user_area/index.php' class='nav-icon'>";
+            }
+          ?>
+          <i class="fa-solid fa-user" style="color: #f4f0f0;"></i></a>
         </div>
       </div>
     </div>

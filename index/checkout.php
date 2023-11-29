@@ -78,7 +78,7 @@
               ?>
             </div>
           </a>
-          <a href="#" class="nav-icon"><i class="fa-solid fa-user" style="color: #f4f0f0;"></i></a>
+          <a href="user_area/index.php" class="nav-icon"><i class="fa-solid fa-user" style="color: #f4f0f0;"></i></a>
         </div>
       </div>
     </div>
