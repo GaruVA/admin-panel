@@ -144,10 +144,9 @@ input[type=search]:not(:placeholder-shown){
 .home .container #main {
 	background: #FFF;
 	color: #000;
-	text-transform: uppercase;
     border-radius: 5px;
     width: 100%;
-    max-height: calc(100vh - 136px);
+    max-height: calc(100vh - 200px);
     overflow: scroll;
     align-content: flex-start;
     padding: 0 20px;
@@ -190,24 +189,12 @@ tbody tr td i {
     color:#000;
 }
 
-tbody tr:last-child {
-    position: sticky;
-    bottom: 0;
-    background: #FFF;
-    text-align: center;
-    z-index: 2;
-}
-
-tbody tr:last-child td a {
-    text-decoration: none;
-    color: black;
-}
-
 thead tr{
     position: sticky;
     top: 0;
     background: #FFF;
     z-index: 1;
+    text-transform: uppercase;
 }
 
 thead tr th {
@@ -233,12 +220,6 @@ tbody tr:first-child td {
     box-shadow: none;
 }
 
-.price {
-    margin-top: -5px;
-    display: inline-block;
-    padding: 0 10px;
-    font-size: 20px;
-}
 
 .btn-custom {
     background-color: #000; 
@@ -267,4 +248,33 @@ td button {
   cursor: pointer;
   border: none;
   background-color: transparent;
+}
+
+.bottom {
+  display: flex;
+  align-items: center;
+  height: 64px;
+  flex-wrap: wrap;
+}
+
+.bottom .right {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-left: auto;
+  white-space: nowrap;
+  color: black;
+}
+
+.bottom .right .price {
+  font-size: 23px;
+}
+
+.bottom .right a{
+  color: #f4f0f0;
+}
+
+.bottom .left a {
+  color: black;
+  text-decoration: none;
 }

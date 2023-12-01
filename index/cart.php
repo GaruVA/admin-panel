@@ -125,7 +125,7 @@
                       <button type='submit' name='cart' value='$product_id' onclick='incrementQuantity($product_id)'>+</button>
                       </form>
                       </td>
-                      <td>$$product_price_quantity</td>
+                      <td>Rs. $product_price_quantity</td>
                       <td style='text-align:center'>
                           <a href='cart.php?delete=$product_id'><i class='fa-solid fa-trash' style='color: #393E46;'></i></a>
                       </td>
@@ -150,12 +150,14 @@
           }
 
         ?>
-        
-        <tr>
-            <td style="text-align: left"><a href="products.php"><i class="fa-solid fa-arrow-left"></i> Continue Shopping</a></td>
-            <td colspan=3 style="text-align: right">
+    </tbody>
+</table>
+</div>
+<div class="bottom">
+<div class="left"><a href="products.php"><i class="fa-solid fa-arrow-left"></i> Continue Shopping</a></div>
+            <div class="right">
               Total:
-              <div class="price">$
+              <div class="price">Rs.
                   <?php
                       $total_price = 0;
 
@@ -175,11 +177,8 @@
                       echo $total_price;
                   ?>
               </div>
-              <a href="checkout.php" class="btn btn-custom" style="color: #f4f0f0"><i class="fa-solid fa-cart-shopping" style="color: #f4f0f0;"></i> Checkout</a>
-          </td>
-        </tr>
-    </tbody>
-</table>
+              <a href="checkout.php" class="btn btn-custom"><i class="fa-solid fa-cart-shopping" style="color: #f4f0f0;"></i> Checkout</a>
+            </div>
 </div>
         </div>  
       </div>

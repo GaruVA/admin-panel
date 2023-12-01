@@ -142,7 +142,7 @@
                                   <div class='card__bar'></div>
                                   <div class='card__preview-txt'>$product_desc</div>
                                   <ul class='card__tagbox'>
-                                      <li class='tag__item'><i class='fas fa-tag mr-2'></i>$$product_price/day</li>
+                                      <li class='tag__item'><i class='fas fa-tag mr-2'></i>Rs. $product_price/day</li>
                                       <li class='tag__item'>
                                       <button onclick='decrementQuantity($product_id)'>-</button>
                                       <form>
@@ -189,7 +189,7 @@
                           <div class='card__bar'></div>
                           <div class='card__preview-txt'>$product_desc</div>
                           <ul class='card__tagbox'>
-                              <li class='tag__item'><i class='fas fa-tag mr-2'></i>$$product_price/day</li>
+                              <li class='tag__item'><i class='fas fa-tag mr-2'></i>Rs. $product_price/day</li>
                               <li class='tag__item'>
                               <button onclick='decrementQuantity($product_id)'>-</button>
                               <form>
@@ -230,7 +230,7 @@
                           <div class='card__bar'></div>
                           <div class='card__preview-txt'>$product_desc</div>
                           <ul class='card__tagbox'>
-                              <li class='tag__item'><i class='fas fa-tag mr-2'></i>$$product_price/day</li>
+                              <li class='tag__item'><i class='fas fa-tag mr-2'></i>Rs. $product_price/day</li>
                               <li class='tag__item'>
                               <button onclick='decrementQuantity($product_id)'>-</button>
                               <form>
