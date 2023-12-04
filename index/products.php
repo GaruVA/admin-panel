@@ -69,7 +69,7 @@
             </div>
           </a>
           <?php
-            if(!isset($_SESSION['user_name'])) {
+            if(!isset($_SESSION['user_email'])) {
               echo "<a href='login.php' class='nav-icon'>";
             }else{
               echo "<a href='user_area/index.php' class='nav-icon'>";

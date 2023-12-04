@@ -1,5 +1,9 @@
 <?php
     session_start();
+    if(isset($_SESSION['user_email'])) {
+      header("Location: products.php");
+      exit();
+    }
     include("admin_panel/includes/connection.php");
 
     function getIPAddress() {  
@@ -83,8 +87,8 @@
         <h1>Login In</h1>
         <form action="" method="POST">
         <div class="input-field">
-            <input type="text" id="user_name" placeholder=" " required="required" name="user_name">
-            <label for="user_name" class="form-label">Username</label>
+            <input type="text" id="user_email" placeholder=" " required="required" name="user_email">
+            <label for="user_email" class="form-label">Email</label>
           </div> 
           <div class="input-field">
             <input type="password" name="conf_user_password" id="conf_user_password" placeholder=" " required="required">
@@ -174,16 +178,16 @@
 
 <?php
 if(isset($_POST["login"])) {
-  $user_name=$_POST["user_name"];
+  $user_email=$_POST["user_email"];
   $conf_user_password=$_POST["conf_user_password"];
 
-  $sql_select_user="SELECT * FROM `users` WHERE user_name='$user_name';";
+  $sql_select_user="SELECT * FROM `users` WHERE user_email='$user_email';";
   $result_select_user=mysqli_query($conn, $sql_select_user);
   if(mysqli_num_rows($result_select_user) > 0) {
     $row_select_user = mysqli_fetch_assoc($result_select_user);
     $password=$row_select_user['user_password'];
     if(password_verify($conf_user_password, $password)) {
-      $_SESSION['user_name']=$user_name;
+      $_SESSION['user_email']=$user_email;
       echo "<script>alert('Login Successful')</script>";
       $sql_select_cart="SELECT * FROM `cart` WHERE ip_address='$ip_address'";
       $result_select_cart=mysqli_query($conn,$sql_select_cart);

@@ -1,5 +1,9 @@
 <?php 
     session_start();
+    if(isset($_SESSION['user_email'])) {
+      header("Location: products.php");
+      exit();
+    }
     include("admin_panel/includes/connection.php");
 
     function getIPAddress() {  
@@ -76,15 +80,21 @@
   <div class="container">
     <div class="row" id="main">
       <div class="col-md-6" id="left">
-        <img src="image/login.avif" alt="" width="100%" height="729px" style="border-radius: 5px;">
+        <img src="image/login.avif" alt="" width="100%" height="750px" style="border-radius: 5px;">
       </div>
       <div class="col-md-6" id="right">
         <h1>Sign Up</h1>
         <form action="" method="POST" enctype="multipart/form-data">
+        <div class="half">
           <div class="input-field">
-            <input type="text" id="user_name" placeholder=" " required="required" name="user_name">
-            <label for="user_name" class="form-label">Username</label>
-          </div> 
+            <input type="text" name="user_firstname" id="user_firstname" placeholder=" " required="required">
+            <label for="user_firstname">First Name</label>
+          </div>
+          <div class="input-field">
+            <input type="text" name="user_lastname" id="user_lastname" placeholder=" " required="required">
+            <label for="user_lastname">Last Name</label>
+          </div>
+          </div>
           <div class="input-field">
             <input type="email" name="user_email" id="user_email" placeholder=" " required="required">
             <label for="user_email">Email</label>
@@ -100,6 +110,16 @@
           <div class="input-field">
             <input type="text" name="user_address" id="user_address" placeholder=" " required="required">
             <label for="user_address">Address</label>
+          </div>
+          <div class="half">
+          <div class="input-field">
+            <input type="text" name="user_address_state" id="user_address_state" placeholder=" " required="required">
+            <label for="user_address_state">State</label>
+          </div>
+          <div class="input-field">
+          <input type="text" name="user_address_city" id="user_address_city" placeholder=" " required="required">
+            <label for="user_address_city">City</label>
+          </div>
           </div>
           <div class="input-field">
             <input type="text" name="user_contact" id="user_contact" placeholder=" " required="required">
@@ -162,27 +182,33 @@
 <!--php code-->
 <?php
 if(isset($_POST['signup'])){
-  $user_name = $_POST['user_name'];
+  $user_firstname = $_POST['user_firstname'];
+  $user_lastname = $_POST['user_lastname'];
   $user_email = $_POST['user_email'];
   $user_password = $_POST['user_password'];
   $conf_user_password = $_POST['conf_user_password'];
   $user_password_hash = password_hash($conf_user_password, PASSWORD_DEFAULT);
   $user_address = $_POST['user_address'];
+  $user_address_state = $_POST['user_address_state'];
+  $user_address_city = $_POST['user_address_city'];
   $user_contact = $_POST['user_contact'];
 
+
+
   //select query
-  $select_query="SELECT * FROM `users` WHERE user_name='$user_name' OR user_email='$user_email'";
+  $select_query="SELECT * FROM `users` WHERE user_email='$user_email'";
   $result=mysqli_query($conn,$select_query);
   $rows_count=mysqli_num_rows($result);
   if($rows_count>0){
-    echo "<script>alert('Username or Email already exist')</script>";
+    echo "<script>alert('Email already exist')</script>";
   }else if($user_password!=$conf_user_password){
     echo "<script>alert('Password does not match')</script>";
   }else{
     //insert_query
-    $insert_query="INSERT INTO `users` (user_name,user_email,user_password,user_address,user_contact,user_ip) VALUES ('$user_name','$user_email','$user_password_hash','$user_address','$user_contact','$ip_address')";
+    $insert_query="INSERT INTO `users` (user_firstname,user_lastname,user_email,user_password,user_address,user_address_state,user_address_city,user_contact,user_ip) VALUES ('$user_firstname','$user_lastname','$user_email','$user_password_hash','$user_address','$user_address_state','$user_address_city','$user_contact','$ip_address')";
     $sql_execute=mysqli_query($conn,$insert_query);
-    $_SESSION['user_name']=$user_name;
+    $_SESSION['user_email']=$user_email;
+    echo "<script>alert('Signup Successful')</script>";
     $sql_select_cart="SELECT * FROM `cart` WHERE ip_address='$ip_address'";
     $result_select_cart=mysqli_query($conn,$sql_select_cart);
     if(mysqli_num_rows($result_select_cart) > 0){

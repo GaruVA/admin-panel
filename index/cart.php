@@ -70,7 +70,7 @@
             </div>
           </a>
             <?php
-              if(!isset($_SESSION['user_name'])) {
+              if(!isset($_SESSION['user_email'])) {
                 echo "<a href='login.php' class='nav-icon'>";
               }else{
                 echo "<a href='user_area/index.php' class='nav-icon'>";
@@ -86,18 +86,80 @@
 
   <section class="home">
       <div class="container">
-        <div class="row" id="main">
-      <table>
-    <thead>
-        <tr>
-            <th>Product</th>
-            <th>Quantity</th>
-            <th>Price</th>
-            <th style="text-align: center">Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="row" id="main">
+              <table>
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th style="text-align: center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                        $total_price = 0;
+
+                        $cart_query = "SELECT * FROM cart WHERE ip_address = '$ip_address'";
+                        $result = mysqli_query($conn, $cart_query);
+
+                        while ($row = mysqli_fetch_assoc($result)) {
+                          $product_id = $row['product_id'];
+                          $quantity = $row['quantity'];
+
+                          $product_query = "SELECT * FROM products WHERE product_id = '$product_id'";
+                          $result_product = mysqli_query($conn, $product_query);
+                          $row_product = mysqli_fetch_assoc($result_product);
+                          $product_name = $row_product['product_name'];
+                          $product_image = $row_product['product_image'];
+                          $product_price = $row_product['product_price'];
+                          $product_price_quantity = $product_price * $quantity;
+                        
+
+                          echo "<tr>
+                                  <td><img src='admin_panel/includes/product_images/$product_image' alt='$product_name' height='40px'>&nbsp;&nbsp;&nbsp;$product_name</td>
+                                  <td>
+                                  <form>
+                                  <button type='submit' name='cart' value='$product_id' onclick='decrementQuantity($product_id)'>-</button>
+                                  <input type='number' id='$product_id' name='quantity' min='1' value=$quantity>
+                                  <button type='submit' name='cart' value='$product_id' onclick='incrementQuantity($product_id)'>+</button>
+                                  </form>
+                                  </td>
+                                  <td>Rs. $product_price_quantity</td>
+                                  <td style='text-align:center'>
+                                      <a href='cart.php?delete=$product_id'><i class='fa-solid fa-trash' style='color: #393E46;'></i></a>
+                                  </td>
+                                </tr>";
+                        }
+
+                        if(isset($_GET['cart']) && isset($_GET['quantity'])) {
+                            $product_id = $_GET['cart'];
+                            $quantity = $_GET['quantity'];
+                            $sql_update_cart = "UPDATE `cart` SET quantity=$quantity WHERE ip_address='$ip_address' AND product_id=$product_id;";
+                            $result_update_cart = mysqli_query($conn, $sql_update_cart);
+                            echo "<script>window.location.href = 'cart.php';</script>";
+                            exit;
+                        }
+
+                        if(isset($_GET['delete'])) {
+                          $product_id = $_GET['delete'];
+                          $sql_delete_cart = "DELETE FROM `cart` WHERE ip_address = '$ip_address' AND product_id = $product_id;";
+                          $result_update_cart = mysqli_query($conn, $sql_delete_cart);
+                          echo "<script>window.location.href = 'cart.php';</script>";
+                          exit;
+                      }
+
+                    ?>
+                </tbody>
+              </table>
+            </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="bottom">
+            <div class="left"><a href="products.php"><i class="fa-solid fa-arrow-left"></i> Continue Shopping</a></div>
+            <?php 
             $total_price = 0;
 
             $cart_query = "SELECT * FROM cart WHERE ip_address = '$ip_address'";
@@ -107,82 +169,29 @@
               $product_id = $row['product_id'];
               $quantity = $row['quantity'];
 
-              $product_query = "SELECT * FROM products WHERE product_id = '$product_id'";
+              $product_query = "SELECT product_price FROM products WHERE product_id = '$product_id'";
               $result_product = mysqli_query($conn, $product_query);
-              $row_product = mysqli_fetch_assoc($result_product);
-              $product_name = $row_product['product_name'];
-              $product_image = $row_product['product_image'];
-              $product_price = $row_product['product_price'];
-              $product_price_quantity = $product_price * $quantity;
-            
-
-              echo "<tr>
-                      <td><img src='admin_panel/includes/product_images/$product_image' alt='$product_name' height='40px'>&nbsp;&nbsp;&nbsp;$product_name</td>
-                      <td>
-                      <form>
-                      <button type='submit' name='cart' value='$product_id' onclick='decrementQuantity($product_id)'>-</button>
-                      <input type='number' id='$product_id' name='quantity' min='1' value=$quantity>
-                      <button type='submit' name='cart' value='$product_id' onclick='incrementQuantity($product_id)'>+</button>
-                      </form>
-                      </td>
-                      <td>Rs. $product_price_quantity</td>
-                      <td style='text-align:center'>
-                          <a href='cart.php?delete=$product_id'><i class='fa-solid fa-trash' style='color: #393E46;'></i></a>
-                      </td>
-                    </tr>";
-            }	
-
-            if(isset($_GET['cart']) && isset($_GET['quantity'])) {
-                $product_id = $_GET['cart'];
-                $quantity = $_GET['quantity'];
-                $sql_update_cart = "UPDATE `cart` SET quantity=$quantity WHERE ip_address='$ip_address' AND product_id=$product_id;";
-                $result_update_cart = mysqli_query($conn, $sql_update_cart);
-                echo "<script>window.location.href = 'cart.php';</script>";
-                exit;
+              $row_product_price = mysqli_fetch_assoc($result_product);
+              $total_price += $row_product_price['product_price'] * $quantity;
             }
-
-            if(isset($_GET['delete'])) {
-              $product_id = $_GET['delete'];
-              $sql_delete_cart = "DELETE FROM `cart` WHERE ip_address = '$ip_address' AND product_id = $product_id;";
-              $result_update_cart = mysqli_query($conn, $sql_delete_cart);
-              echo "<script>window.location.href = 'cart.php';</script>";
-              exit;
-          }
-
-        ?>
-    </tbody>
-</table>
-</div>
-<div class="bottom">
-<div class="left"><a href="products.php"><i class="fa-solid fa-arrow-left"></i> Continue Shopping</a></div>
-            <div class="right">
+            if(mysqli_num_rows($result)>0) {
+              echo "<div class='right'>
+              <div class='price-container'>
               Total:
-              <div class="price">Rs.
-                  <?php
-                      $total_price = 0;
-
-                      $cart_query = "SELECT * FROM cart WHERE ip_address = '$ip_address'";
-                      $result = mysqli_query($conn, $cart_query);
-
-                      while ($row = mysqli_fetch_assoc($result)) {
-                        $product_id = $row['product_id'];
-                        $quantity = $row['quantity'];
-
-                        $product_query = "SELECT product_price FROM products WHERE product_id = '$product_id'";
-                        $result_product = mysqli_query($conn, $product_query);
-                        $row_product_price = mysqli_fetch_assoc($result_product);
-                        $total_price += $row_product_price['product_price'] * $quantity;
-                      }	
-
-                      echo $total_price;
-                  ?>
+              <div class='price'>Rs. $total_price</div>
               </div>
-              <a href="checkout.php" class="btn btn-custom"><i class="fa-solid fa-cart-shopping" style="color: #f4f0f0;"></i> Checkout</a>
-            </div>
-</div>
-        </div>  
+              <div class='buttons'>
+              <a href='checkout.php' class='btn btn-custom'><i class='fa-solid fa-cart-shopping' style='color: #f4f0f0;'></i> Checkout</a>
+              </div>
+            </div>";
+
+            } ?>     
+          </div>
+        </div>
       </div>
-  </section>
+    </div>  
+  </div>
+</section>
 
   <!-- Footer -->
 

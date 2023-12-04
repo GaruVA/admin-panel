@@ -129,7 +129,6 @@ input[type=search]:not(:placeholder-shown){
 .home{
   margin-top: 106px;
   margin-bottom: 30px;
-  height: calc(100vh - 136px);
   width: 100%;
   background-color: #EEEEEE;
   transition: all 0.3s ease;
@@ -144,10 +143,8 @@ input[type=search]:not(:placeholder-shown){
 .home .container #main {
 	background: #FFF;
 	color: #000;
-	text-transform: uppercase;
     border-radius: 5px;
     width: 100%;
-    max-height: calc(100vh - 136px);
     overflow: scroll;
     align-content: flex-start;
     padding: 0 20px;
@@ -162,7 +159,7 @@ input[type=search]:not(:placeholder-shown){
 .home .container #main table td,
 .home .container #main table th
 {
-    padding: 20px 0px;
+    padding: 10px 0px;
     white-space: nowrap;
 
 }
@@ -190,24 +187,12 @@ tbody tr td i {
     color:#000;
 }
 
-tbody tr:last-child {
-    position: sticky;
-    bottom: 0;
-    background: #FFF;
-    text-align: center;
-    z-index: 2;
-}
-
-tbody tr:last-child td a {
-    text-decoration: none;
-    color: black;
-}
-
 thead tr{
     position: sticky;
     top: 0;
     background: #FFF;
     z-index: 1;
+    text-transform: uppercase;
 }
 
 thead tr th {
@@ -216,7 +201,6 @@ thead tr th {
 
 tbody tr td {
     border-top: 1px solid #EEEEEE;
-    height: 81px;
 }
 
 tbody tr:first-child td {
@@ -233,12 +217,6 @@ tbody tr:first-child td {
     box-shadow: none;
 }
 
-.price {
-    margin-top: -5px;
-    display: inline-block;
-    padding: 0 10px;
-    font-size: 20px;
-}
 
 .btn-custom {
     background-color: #000; 
@@ -267,4 +245,111 @@ td button {
   cursor: pointer;
   border: none;
   background-color: transparent;
+}
+#main2 {
+  background: #FFF;
+  color: #000;
+  border-radius: 5px;
+  overflow: scroll;
+  align-content: flex-start;
+  padding: 0px 32px;
+  position: relative;
+  margin: 0;
+  margin-top: 10px;
+}
+
+#main2 .heading {
+  font-weight: bold;
+  padding: 10px 0px;
+  border-bottom: 1px solid #EEEEEE;
+}
+
+#main2 ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#main2 ul li {
+  padding: 8px 0px;
+  display: flex;
+}
+
+#main2 ul li .ml {
+  margin-left: auto;
+  text-align: right;
+}
+
+#main2::-webkit-scrollbar{
+  width: 0.5rem;
+  height: 0.5rem;
+}
+
+#main2::-webkit-scrollbar-thumb{
+  border-radius: .5rem;
+  background-color: #0004;
+  visibility: hidden;
+}
+
+#main2:hover::-webkit-scrollbar-thumb{ 
+  visibility: visible;
+}
+
+.bottom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.bottom .right {
+  color: black;
+  width: 95%;
+}
+
+.bottom .right .price-container {
+  display: flex;
+  align-items: center;
+  padding-bottom: 10px;
+}
+
+
+.bottom .right .price {
+  margin-left: auto;
+}
+
+.bottom .right .buttons {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.bottom .right a{
+  color: #f4f0f0;
+}
+
+.bottom .left a {
+  color: black;
+  text-decoration: none;
+}
+
+@media (max-width: 992px) {
+  #main2 {
+    margin-top: 10px;
+  }
+
+  .bottom {
+    margin-top: 10px;
+  }
+
+  .home{
+    height: auto;
+    min-height: calc(100vh - 136px);
+  }
+
+
 }

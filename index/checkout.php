@@ -1,6 +1,6 @@
 <?php
     session_start();
-    if(!isset($_SESSION['user_name'])) {
+    if(!isset($_SESSION['user_email'])) {
       header("Location: login.php");
       exit();
     }
@@ -42,6 +42,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
   <link rel="stylesheet" href="checkout.css">
   <script src="https://kit.fontawesome.com/d5f76a1949.js" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 
 <body>
@@ -78,7 +79,7 @@
               ?>
             </div>
           </a>
-          <a href="user_area/index.php" class="nav-icon"><i class="fa-solid fa-user" style="color: #f4f0f0;"></i></a>
+          <a href='user_area/index.php' class='nav-icon'><i class="fa-solid fa-user" style="color: #f4f0f0;"></i></a>
         </div>
       </div>
     </div>
@@ -88,8 +89,137 @@
 
   <section class="home">
       <div class="container">
-        
-      </div>
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="row" id="main">
+              <table>
+                <thead>
+                  <tr>
+                      <th>Product</th>
+                      <th>Quantity</th>
+                      <th>Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <?php
+                        $total_price = 0;
+
+                        $cart_query = "SELECT * FROM cart WHERE ip_address = '$ip_address'";
+                        $result = mysqli_query($conn, $cart_query);
+
+                        while ($row = mysqli_fetch_assoc($result)) {
+                          $product_id = $row['product_id'];
+                          $quantity = $row['quantity'];
+
+                          $product_query = "SELECT * FROM products WHERE product_id = '$product_id'";
+                          $result_product = mysqli_query($conn, $product_query);
+                          $row_product = mysqli_fetch_assoc($result_product);
+                          $product_name = $row_product['product_name'];
+                          $product_image = $row_product['product_image'];
+                          $product_price = $row_product['product_price'];
+                          $product_price_quantity = $product_price * $quantity;
+                          $total_price += $product_price_quantity;
+                        
+
+                          echo "<tr>
+                                  <td>$product_name</td>
+                                  <td>$quantity</td>
+                                  <td>Rs. $product_price_quantity</td>
+                                </tr>";
+                        }	
+                    ?>
+                </tbody>
+              </table>
+            </div>
+            <div id="main2">
+              <div class="heading">DELIVER TO</div>
+                <ul class="details">
+                  <?php
+                    $user_ip=getIPAddress();
+                    $sql_select_user="SELECT * FROM `users` WHERE user_ip='$user_ip'";
+                    $result_select_user = mysqli_query($conn, $sql_select_user);
+                    $row_select_user = mysqli_fetch_assoc($result_select_user);
+                    $user_firstname = $row_select_user["user_firstname"]; 
+                    $user_lastname = $row_select_user["user_lastname"]; 
+                    $user_contact = $row_select_user["user_contact"];
+                    $user_address = $row_select_user["user_address"];
+                    $user_address_city = $row_select_user["user_address_city"];
+                    $user_address_state = $row_select_user["user_address_state"];
+                  ?>
+                </ul>
+                <form action="orders.php" method="post">
+                  <div class="row mb-3 mt-3">
+                      <div class="col-md-6">
+                          <label for="firstname" class="form-label">First Name:</label>
+                          <input type="text" id="firstname" name="delivery_firstname" value="<?php echo $user_firstname;?>" class="form-control" required>
+                      </div>
+
+                      <div class="col-md-6">
+                          <label for="lastname" class="form-label">Last Name:</label>
+                          <input type="lastname" id="price" name="delivery_lastname" value="<?php echo $user_lastname;?>" class="form-control" required>
+                      </div>
+                  </div>
+
+                  <div class="mb-3">
+                      <label for="address" class="form-label">Address:</label>
+                      <input type="text" id="address" name="delivery_address" value="<?php echo $user_address;?>" class="form-control" required>
+                  </div>
+
+                  <div class="row mb-3">
+                      <div class="col-md-6">
+                          <label for="addressstate" class="form-label">State:</label>
+                          <input type="text" id="addressstate" name="delivery_address_state" value="<?php echo $user_address_state;?>" class="form-control" required>
+                      </div>
+
+                      <div class="col-md-6">
+                          <label for="addresscity" class="form-label">City:</label>
+                          <input type="text" id="addresscity" name="delivery_address_city" value="<?php echo $user_address_city;?>" class="form-control" required>
+                      </div>
+                  </div>
+
+                  <div class="mb-3">
+                      <label for="contact" class="form-label">Contact No:</label>
+                      <input type="text" id="contact" name="delivery_contact" value="<?php echo $user_contact;?>" class="form-control" required>
+                  </div>
+                  <input type="submit" id="submit-form" name="submit" value="submit" style="display: none"/>
+              </form>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            
+            <div class="bottom">
+              <div class="right">
+              <div class="price-container">
+                  Sub Total:
+                  <div class="price">Rs.
+                      <?php
+                          echo $total_price;
+                      ?>
+                    </div>
+                </div>
+                <div class="price-container">
+                  Shipping: 
+                  <div class="price">Rs. 
+                    <?php
+                      $shipping = 300;
+                      echo $shipping;
+                    ?> 
+                  </div>
+                </div>
+                <div class="price-container">
+                  Total: 
+                  <div class="price">Rs. <?php echo $total_price+$shipping;?> </div>
+                </div>
+                <div class="buttons">
+                  <a href="https://www.paypal.com" class="btn btn-custom">Pay Now</a>
+                  <label for="submit-form" tabindex="0" class="btn btn-custom">Cash on Delivery</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>  
+    </div>
   </section>
 
   <!-- Footer -->
@@ -155,10 +285,8 @@
     <p class="text-center">Copyright @2023 - All Rights Reserved by RentHub</p>
 
   </footer>
+  
 
-
-  <script>
-  </script>
 </body>
 
 </html>

@@ -368,6 +368,11 @@ form .button-area .col-md-6 span {
     border: 1px solid rgb(0, 173, 181);
 }  
 
+.half {
+    display: flex;
+    gap: 10px;
+}
+
 /* footer */
 
 footer {
