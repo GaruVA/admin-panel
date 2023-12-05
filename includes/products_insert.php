@@ -1,5 +1,4 @@
 <?php
-    include("connection.php");
     if(isset($_POST["submit"])){
         $product_name = $_POST["product_name"];
         $product_price = $_POST["product_price"];

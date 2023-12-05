@@ -1,5 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php 
+    session_start();
+    if(!isset($_SESSION['user_email']) || !isset($_SESSION['user_type'])) {
+        header("Location: login.php");
+        exit();
+    }
+    include("includes/connection.php");
+
+    function getIPAddress() {  
+       if(!empty($_SERVER['HTTP_CLIENT_IP'])) {  
+                  $ip = $_SERVER['HTTP_CLIENT_IP'];  
+          }  
+
+      elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {  
+                  $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];  
+       }  
+      else{  
+               $ip = $_SERVER['REMOTE_ADDR'];  
+       }  
+       return $ip;  
+    } 
+    $ip_address = getIPAddress();
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -53,14 +74,14 @@
                     </li>
 
                     <li class="nav-link">
-                        <a href="orders.php">
+                        <a href="orders.php?view">
                             <i class='bx bx-list-ul icon' ></i>
                             <span class="text nav-text">Order list</span>
                         </a>
                     </li>
                     
                     <li class="nav-link">
-                        <a href="users.php">
+                        <a href="users.php?view">
                         <i class='bx bx-user icon' ></i>
                             <span class="text nav-text">Users</span>
                         </a>
@@ -70,7 +91,7 @@
  
             <div class="bottom-content">
                 <li class="">
-                    <a href="#">
+                    <a href="logout.php">
                         <i class='bx bx-log-out icon' ></i>
                         <span class="text nav-text">Logout</span>
                     </a>

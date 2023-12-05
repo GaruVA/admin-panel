@@ -1,16 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php 
+    session_start();
+    if(!isset($_SESSION['user_email']) || !isset($_SESSION['user_type'])) {
+        header("Location: login.php");
+        exit();
+    }
+    include("includes/connection.php");
+
+    function getIPAddress() {  
+       if(!empty($_SERVER['HTTP_CLIENT_IP'])) {  
+                  $ip = $_SERVER['HTTP_CLIENT_IP'];  
+          }  
+
+      elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {  
+                  $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];  
+       }  
+      else{  
+               $ip = $_SERVER['REMOTE_ADDR'];  
+       }  
+       return $ip;  
+    } 
+    $ip_address = getIPAddress();
+?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script> 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://kit.fontawesome.com/d5f76a1949.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="users.css">
 </head>
 <body>
@@ -53,14 +75,14 @@
                     </li>
 
                     <li class="nav-link">
-                        <a href="orders.php">
+                        <a href="orders.php?view">
                             <i class='bx bx-list-ul icon' ></i>
                             <span class="text nav-text">Order list</span>
                         </a>
                     </li>
                     
                     <li class="nav-link">
-                        <a href="users.php">
+                        <a href="users.php?view">
                         <i class='bx bx-user icon' ></i>
                             <span class="text nav-text">Users</span>
                         </a>
@@ -70,7 +92,7 @@
  
             <div class="bottom-content">
                 <li class="">
-                    <a href="#">
+                    <a href="logout.php">
                         <i class='bx bx-log-out icon' ></i>
                         <span class="text nav-text">Logout</span>
                     </a>
@@ -82,17 +104,38 @@
 
     <section class="home">
         <div class="header"> Users</div>
+        <div class="container">
+            <div class="row" id="main">
+                <?php 
+                    if(isset($_GET['view'])) {
+                        include('includes/users_view.php');
+                    }
+                    if(isset($_GET['edit'])) {
+                        include('includes/users_edit.php');
+                    }
+                    if(isset($_GET['delete'])) {
+                        $user_id = $_GET['delete'];
+                        $sql_delete_user = "DELETE FROM `users` WHERE user_id=$user_id";
+                        $result_delete_user = mysqli_query($conn,$sql_delete_user);
+                        if($result_delete_user){
+                        echo "<script>alert('User deleted successfully')</script>";
+                        echo "<script>window.open('users.php?view','_self')</script>";
+                        } else {
+                            echo "<script>alert('Error: Unable to delete the user at the moment. Please try again later.');</script>";
+                        }
+                    }
+                ?> 
+            </div>
+        </div>
     </section>
 
     <script>
         const body = document.querySelector('body'),
-      sidebar = body.querySelector('nav'),
-      toggle = body.querySelector(".toggle");
-
-
-toggle.addEventListener("click" , () =>{
-    sidebar.classList.toggle("close");
-})
+        sidebar = body.querySelector('nav'),
+        toggle = body.querySelector(".toggle");
+        toggle.addEventListener("click" , () =>{
+            sidebar.classList.toggle("close");
+        })
     </script>
 
 </body>

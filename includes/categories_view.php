@@ -3,13 +3,11 @@
         <tr>
             <th>ID</th>
             <th>Name</th>
-            <th>Action</th>
+            <th style='text-align: center'>Action</th>
         </tr>
     </thead>
     <tbody>
         <?php
-            include("includes/connection.php");
-
             $sql_select_categories = "SELECT * FROM `categories`;";
             $result_categories = mysqli_query($conn, $sql_select_categories);
 
@@ -21,16 +19,8 @@
                     echo "<tr>
                             <td>$category_id</td>
                             <td>$category_name</td>
-                            <td>
-                                <div class='dropdown'>
-                                    <a class='nav-link dropdown-toggle nav-center' href='#' id='navbarDarkDropdownMenuLink' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
-                                        <i class='bx bx-dots-horizontal-rounded'></i>
-                                    </a>
-                                    <div class='dropdown-menu' aria-labelledby='navbarDarkDropdownMenuLink'>
-                                        <a class='dropdown-item' href='#'>Edit</a>
-                                        <a class='dropdown-item' href='#'>Delete</a>
-                                    </div>
-                                </div>
+                            <td style='text-align: center'>
+                                <a href='categories.php?edit=$category_id'><i class='fa-solid fa-chevron-right' style='color: #000000a1;font-size: 13px;'></i></i></a>
                             </td>
                         </tr>";
                 }

@@ -205,7 +205,7 @@ if(isset($_POST['signup'])){
     echo "<script>alert('Password does not match')</script>";
   }else{
     //insert_query
-    $insert_query="INSERT INTO `users` (user_firstname,user_lastname,user_email,user_password,user_address,user_address_state,user_address_city,user_contact,user_ip) VALUES ('$user_firstname','$user_lastname','$user_email','$user_password_hash','$user_address','$user_address_state','$user_address_city','$user_contact','$ip_address')";
+    $insert_query="INSERT INTO `users` (user_firstname,user_lastname,user_email,user_password,user_address,user_address_state,user_address_city,user_contact,user_ip,user_type) VALUES ('$user_firstname','$user_lastname','$user_email','$user_password_hash','$user_address','$user_address_state','$user_address_city','$user_contact','$ip_address','user')";
     $sql_execute=mysqli_query($conn,$insert_query);
     $_SESSION['user_email']=$user_email;
     echo "<script>alert('Signup Successful')</script>";
