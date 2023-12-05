@@ -8,7 +8,7 @@
     </thead>
     <tbody>
         <?php
-            $sql_select_categories = "SELECT * FROM `categories`;";
+            $sql_select_categories = "SELECT * FROM `renthub_categories`;";
             $result_categories = mysqli_query($conn, $sql_select_categories);
 
             if (mysqli_num_rows($result_categories) > 0) {
@@ -24,12 +24,7 @@
                             </td>
                         </tr>";
                 }
-            } /*else {
-                // Provide a message if there are no categories
-                echo "<tr>
-                        <td colspan='3'>No categories found.</td>
-                        </tr>";
-            }*/
+            }
         ?>
         <tr>
             <td colspan=3><a href="categories.php?insert">+ Create New Category</a></td>

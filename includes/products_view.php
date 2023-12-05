@@ -11,7 +11,7 @@
     </thead>
     <tbody>
         <?php
-            $sql_select_products = "SELECT * FROM `products`;";
+            $sql_select_products = "SELECT * FROM `renthub_products`;";
             $result_products = mysqli_query($conn, $sql_select_products);
 
             if (mysqli_num_rows($result_products) > 0) {
@@ -33,12 +33,7 @@
                             </td>
                         </tr>";
                 }
-            } /*else {
-                // Provide a message if there are no categories
-                echo "<tr>
-                        <td colspan='3'>No categories found.</td>
-                        </tr>";
-            }*/
+            }
         ?>
         <tr>
             <td colspan=6><a href="products.php?insert">+ Create New Product</a></td>

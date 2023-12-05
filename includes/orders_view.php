@@ -11,7 +11,7 @@
     </thead>
     <tbody>
         <?php
-            $sql_select_orders = "SELECT * FROM `orders`;";
+            $sql_select_orders = "SELECT * FROM `renthub_orders`;";
             $result_select_orders = mysqli_query($conn, $sql_select_orders);
 
             if (mysqli_num_rows($result_select_orders) > 0) {
@@ -32,12 +32,7 @@
                             </td>
                         </tr>";
                 }
-            } /*else {
-                // Provide a message if there are no categories
-                echo "<tr>
-                        <td colspan='3'>No categories found.</td>
-                        </tr>";
-            }*/ 
+            } 
         ?>
     </tbody>
 </table>

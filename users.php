@@ -115,7 +115,7 @@
                     }
                     if(isset($_GET['delete'])) {
                         $user_id = $_GET['delete'];
-                        $sql_delete_user = "DELETE FROM `users` WHERE user_id=$user_id";
+                        $sql_delete_user = "DELETE FROM `renthub_users` WHERE user_id=$user_id";
                         $result_delete_user = mysqli_query($conn,$sql_delete_user);
                         if($result_delete_user){
                         echo "<script>alert('User deleted successfully')</script>";

@@ -14,7 +14,8 @@
                $ip = $_SERVER['REMOTE_ADDR'];  
        }  
        return $ip;  
-    } 
+    }
+    $ip_address = getIPAddress();
 ?>
 
 <!DOCTYPE html>
@@ -61,8 +62,7 @@
             <i class="fa-solid fa-cart-shopping" style="color: #f4f0f0;"></i>
             <div class="cart-number">
               <?php
-                $ip_address = getIPAddress();
-                $sql_select_cart = "SELECT * FROM `cart` WHERE ip_address='$ip_address';";
+                $sql_select_cart = "SELECT * FROM `renthub_cart` WHERE ip_address='$ip_address';";
                 $result_select_cart = mysqli_query($conn, $sql_select_cart);
                 echo mysqli_num_rows($result_select_cart);
               ?>
@@ -86,7 +86,7 @@
         <ul class="navbar-nav mx-auto">
         <li class='nav-item'><a class='nav-link nav-center' href='products.php'>All</a></li>
           <?php
-              $sql_select_categories = "SELECT * FROM `categories`;";
+              $sql_select_categories = "SELECT * FROM `renthub_categories`;";
               $result_categories = mysqli_query($conn, $sql_select_categories);
 
               if (mysqli_num_rows($result_categories) > 0) {
@@ -110,7 +110,7 @@
             <?php
               include("admin_panel/includes/connection.php");
               if(!isset($_GET["category"]) && !isset($_GET["search_product"])){
-                $sql_select_categories = "SELECT * FROM `categories`;";
+                $sql_select_categories = "SELECT * FROM `renthub_categories`;";
                 $result_categories = mysqli_query($conn, $sql_select_categories);
 
                 if (mysqli_num_rows($result_categories) > 0) {
@@ -119,7 +119,7 @@
                         $category_name = $category['category_name'];
 
                         
-                        $sql_select_products = "SELECT * FROM `products` WHERE category_id=$category_id;";
+                        $sql_select_products = "SELECT * FROM `renthub_products` WHERE category_id=$category_id;";
                         $result_products = mysqli_query($conn, $sql_select_products);
 
                         if (mysqli_num_rows($result_products) > 0) {
@@ -162,8 +162,8 @@
                 }
               } elseif(isset($_GET["category"])) {
                 $category_id = $_GET["category"];
-                $sql_select_categories = "SELECT * FROM `categories` WHERE category_id=$category_id;";
-                $sql_select_products = "SELECT * FROM `products` WHERE category_id=$category_id;";
+                $sql_select_categories = "SELECT * FROM `renthub_categories` WHERE category_id=$category_id;";
+                $sql_select_products = "SELECT * FROM `renthub_products` WHERE category_id=$category_id;";
                 $result_products = mysqli_query($conn, $sql_select_products);
                 $result_categories = mysqli_query($conn, $sql_select_categories);
 
@@ -207,7 +207,7 @@
               }
               } elseif(isset($_GET["search_product"])) {
                 $search_product = $_GET["search_product"];
-                $sql_select_products = "SELECT * FROM `products` WHERE product_keywords like '%$search_product%';";
+                $sql_select_products = "SELECT * FROM `renthub_products` WHERE product_keywords like '%$search_product%';";
                 $result_products = mysqli_query($conn, $sql_select_products);
 
                 if (mysqli_num_rows($result_products) > 0) {
@@ -252,17 +252,17 @@
                 $ip_address = getIPAddress();
                 $product_id = $_GET['cart'];
                 $quantity = $_GET['quantity'];
-                $sql_select_cart = "SELECT * FROM `cart` WHERE ip_address='$ip_address' AND product_id=$product_id;";
+                $sql_select_cart = "SELECT * FROM `renthub_cart` WHERE ip_address='$ip_address' AND product_id=$product_id;";
                 $result_select_cart = mysqli_query($conn, $sql_select_cart);
         
                 if (mysqli_num_rows($result_select_cart) > 0) {
                     $cart = mysqli_fetch_assoc($result_select_cart);
                     $cart_quantity = $cart["quantity"];
                     $new_quantity = $cart_quantity + $quantity;
-                    $sql_update_cart = "UPDATE `cart` SET quantity=$new_quantity WHERE ip_address='$ip_address' AND product_id=$product_id;";
+                    $sql_update_cart = "UPDATE `renthub_cart` SET quantity=$new_quantity WHERE ip_address='$ip_address' AND product_id=$product_id;";
                     $result_update_cart = mysqli_query($conn, $sql_update_cart);
                 } else {
-                    $sql_insert_cart = "INSERT INTO `cart` (product_id,ip_address,quantity) VALUES ($product_id,'$ip_address',$quantity);";
+                    $sql_insert_cart = "INSERT INTO `renthub_cart` (product_id,ip_address,quantity) VALUES ($product_id,'$ip_address',$quantity);";
                     $result_insert_cart = mysqli_query($conn, $sql_insert_cart);
                 }
         

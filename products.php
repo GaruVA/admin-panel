@@ -118,7 +118,7 @@
                     }
                     if(isset($_GET['delete'])) {
                         $product_id = $_GET['delete'];
-                        $sql_delete_product = "DELETE FROM `products` WHERE product_id=$product_id";
+                        $sql_delete_product = "DELETE FROM `renthub_products` WHERE product_id=$product_id";
                         $result_delete_product = mysqli_query($conn,$sql_delete_product);
                         if($result_delete_product){
                             echo "<script>alert('Product deleted successfully')</script>";

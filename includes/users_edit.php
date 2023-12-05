@@ -1,7 +1,7 @@
 <?php 
     if(isset($_GET["edit"])) {
         $user_id = $_GET["edit"];
-        $sql_select_user = "SELECT * FROM `users` WHERE user_id=$user_id;";
+        $sql_select_user = "SELECT * FROM `renthub_users` WHERE user_id=$user_id;";
         $result_select_user = mysqli_query($conn,$sql_select_user);
         $row_select_user = mysqli_fetch_assoc($result_select_user);
         $user_firstname = $row_select_user["user_firstname"];
@@ -16,7 +16,7 @@
 
     if(isset($_POST["update"])) {
         $new_user_type = $_POST["user_type"];
-        $sql_update_user="UPDATE `users` SET user_type='$new_user_type' WHERE user_id='$user_id'";
+        $sql_update_user="UPDATE `renthub_users` SET user_type='$new_user_type' WHERE user_id='$user_id'";
         $result_update_user = mysqli_query($conn,$sql_update_user);
         if ($result_update_user) {
             echo "<script>alert('User updated successfully.'); window.location.href = 'users.php?view';</script>";

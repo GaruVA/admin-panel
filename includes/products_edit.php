@@ -1,7 +1,7 @@
 <?php
     if(isset($_GET["edit"])) {
         $product_id = $_GET["edit"];
-        $sql_select_product = "SELECT * FROM `products` WHERE product_id=$product_id;";
+        $sql_select_product = "SELECT * FROM `renthub_products` WHERE product_id=$product_id;";
         $result_select_product = mysqli_query($conn,$sql_select_product);
         $row_select_product = mysqli_fetch_assoc($result_select_product);
         $product_name = $row_select_product["product_name"];
@@ -27,7 +27,7 @@
         } else {
             $new_product_image = $product_image;
         }
-        $sql_update_product = "UPDATE `products` SET product_name='$new_product_name',product_price=$new_product_price,category_id=$new_product_category,product_desc='$new_product_desc',product_image='$new_product_image',product_keywords='$new_product_keywords',status='$new_product_status' WHERE product_id=$product_id;";
+        $sql_update_product = "UPDATE `renthub_products` SET product_name='$new_product_name',product_price=$new_product_price,category_id=$new_product_category,product_desc='$new_product_desc',product_image='$new_product_image',product_keywords='$new_product_keywords',status='$new_product_status' WHERE product_id=$product_id;";
         $result_update_product = mysqli_query($conn, $sql_update_product);
         if ($result_update_product) {
             echo "<script>alert('Product updated successfully.'); window.location.href = 'products.php?view';</script>";
@@ -53,9 +53,7 @@
             <label for="category" class="form-label">Category:</label>
             <select id="category" name="product_category" class="form-select" required>
                 <?php
-                include("includes/connection.php");
-
-                $sql_select_categories = "SELECT * FROM `categories`;";
+                $sql_select_categories = "SELECT * FROM `renthub_categories`;";
                 $result_categories = mysqli_query($conn, $sql_select_categories);
     
                 if (mysqli_num_rows($result_categories) > 0) {

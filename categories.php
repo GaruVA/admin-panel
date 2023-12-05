@@ -118,7 +118,7 @@
                     }
                     if(isset($_GET['delete'])) {
                         $category_id = $_GET['delete'];
-                        $sql_delete_category = "DELETE FROM `categories` WHERE category_id=$category_id";
+                        $sql_delete_category = "DELETE FROM `renthub_categories` WHERE category_id=$category_id";
                         $result_delete_category = mysqli_query($conn,$sql_delete_category);
                         if($result_delete_category){
                             echo "<script>alert('category deleted successfully')</script>";

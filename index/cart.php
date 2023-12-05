@@ -63,7 +63,7 @@
             <i class="fa-solid fa-cart-shopping" style="color: #f4f0f0;"></i>
             <div class="cart-number">
               <?php
-                $sql_select_cart = "SELECT * FROM `cart` WHERE ip_address='$ip_address';";
+                $sql_select_cart = "SELECT * FROM `renthub_cart` WHERE ip_address='$ip_address';";
                 $result_select_cart = mysqli_query($conn, $sql_select_cart);
                 echo mysqli_num_rows($result_select_cart);
               ?>
@@ -102,14 +102,14 @@
                   <?php
                       $total_price = 0;
 
-                      $cart_query = "SELECT * FROM cart WHERE ip_address = '$ip_address'";
+                      $cart_query = "SELECT * FROM `renthub_cart` WHERE ip_address = '$ip_address'";
                       $result = mysqli_query($conn, $cart_query);
 
                       while ($row = mysqli_fetch_assoc($result)) {
                         $product_id = $row['product_id'];
                         $quantity = $row['quantity'];
 
-                        $product_query = "SELECT * FROM products WHERE product_id = '$product_id'";
+                        $product_query = "SELECT * FROM `renthub_products` WHERE product_id = '$product_id'";
                         $result_product = mysqli_query($conn, $product_query);
                         $row_product = mysqli_fetch_assoc($result_product);
                         $product_name = $row_product['product_name'];
@@ -137,7 +137,7 @@
                       if(isset($_GET['cart']) && isset($_GET['quantity'])) {
                           $product_id = $_GET['cart'];
                           $quantity = $_GET['quantity'];
-                          $sql_update_cart = "UPDATE `cart` SET quantity=$quantity WHERE ip_address='$ip_address' AND product_id=$product_id;";
+                          $sql_update_cart = "UPDATE `renthub_cart` SET quantity=$quantity WHERE ip_address='$ip_address' AND product_id=$product_id;";
                           $result_update_cart = mysqli_query($conn, $sql_update_cart);
                           echo "<script>window.location.href = 'cart.php';</script>";
                           exit;
@@ -145,7 +145,7 @@
 
                       if(isset($_GET['delete'])) {
                         $product_id = $_GET['delete'];
-                        $sql_delete_cart = "DELETE FROM `cart` WHERE ip_address = '$ip_address' AND product_id = $product_id;";
+                        $sql_delete_cart = "DELETE FROM `renthub_cart` WHERE ip_address = '$ip_address' AND product_id = $product_id;";
                         $result_update_cart = mysqli_query($conn, $sql_delete_cart);
                         echo "<script>window.location.href = 'cart.php';</script>";
                         exit;
@@ -162,14 +162,14 @@
             <?php 
               $total_price = 0;
 
-              $cart_query = "SELECT * FROM cart WHERE ip_address = '$ip_address'";
+              $cart_query = "SELECT * FROM `renthub_cart` WHERE ip_address = '$ip_address'";
               $result = mysqli_query($conn, $cart_query);
 
               while ($row = mysqli_fetch_assoc($result)) {
                 $product_id = $row['product_id'];
                 $quantity = $row['quantity'];
 
-                $product_query = "SELECT product_price FROM products WHERE product_id = '$product_id'";
+                $product_query = "SELECT product_price FROM `renthub_products` WHERE product_id = '$product_id'";
                 $result_product = mysqli_query($conn, $product_query);
                 $row_product_price = mysqli_fetch_assoc($result_product);
                 $total_price += $row_product_price['product_price'] * $quantity;
@@ -269,5 +269,4 @@
 
   </script>
 </body>
-
 </html>

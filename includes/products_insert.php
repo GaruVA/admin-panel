@@ -11,7 +11,7 @@
         if($product_name == "" or $product_price == "" or $product_category == "" or $product_desc == "" or $product_image == "" or $product_keywords == ""){
             echo "<script>alert('Error: Please fill all the avaiable fields.')</script>";
         } else {
-            $sql_check_duplicate = "SELECT * FROM `products` WHERE product_name='$product_name';";
+            $sql_check_duplicate = "SELECT * FROM `renthub_products` WHERE product_name='$product_name';";
             $result_duplicate_check = mysqli_query($conn, $sql_check_duplicate);
             $row_count = mysqli_num_rows($result_duplicate_check);
 
@@ -19,7 +19,7 @@
                 echo "<script>alert('Error: This product already exists. Please choose a different product.')</script>";
             } else {
                 move_uploaded_file($product_tmpimage, "C:/xampp/htdocs/Assignment-Website/admin_panel/includes/product_images/$product_image");
-                $sql_insert_category = "INSERT INTO `products` (product_name,product_price,category_id,product_desc,product_image,product_keywords,date,status) VALUES ('$product_name','$product_price','$product_category','$product_desc','$product_image','$product_keywords',NOW(),'true');";
+                $sql_insert_category = "INSERT INTO `renthub_products` (product_name,product_price,category_id,product_desc,product_image,product_keywords,date,status) VALUES ('$product_name','$product_price','$product_category','$product_desc','$product_image','$product_keywords',NOW(),'true');";
                 $result_insert = mysqli_query($conn, $sql_insert_category);
 
                 if ($result_insert) {
@@ -50,7 +50,7 @@
                 <?php
                 include("includes/connection.php");
 
-                $sql_select_categories = "SELECT * FROM `categories`;";
+                $sql_select_categories = "SELECT * FROM `renthub_categories`;";
                 $result_categories = mysqli_query($conn, $sql_select_categories);
     
                 if (mysqli_num_rows($result_categories) > 0) {

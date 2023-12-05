@@ -1,7 +1,7 @@
 <?php 
     if(isset($_GET["edit"])) {
         $order_id = $_GET["edit"];
-        $sql_select_order = "SELECT * FROM `orders` WHERE order_id=$order_id;";
+        $sql_select_order = "SELECT * FROM `renthub_orders` WHERE order_id=$order_id;";
         $result_select_order = mysqli_query($conn,$sql_select_order);
         $row_select_order = mysqli_fetch_assoc($result_select_order);
         $user_id = $row_select_order["user_id"];
@@ -9,7 +9,7 @@
         $order_status = $row_select_order["order_status"];
         $order_amount = $row_select_order["order_amount"];
         $order_payment = $row_select_order["order_payment"];
-        $sql_select_delivery = "SELECT * FROM `delivery` WHERE order_id=$order_id;";
+        $sql_select_delivery = "SELECT * FROM `renthub_delivery` WHERE order_id=$order_id;";
         $result_select_delivery = mysqli_query($conn,$sql_select_delivery);
         $row_select_delivery = mysqli_fetch_assoc($result_select_delivery);
         $delivery_firstname = $row_select_delivery["delivery_firstname"];
@@ -22,7 +22,7 @@
     if(isset($_POST["update"])) {
         $new_order_status = $_POST["order_status"];
         $new_order_payment = $_POST["order_payment"];
-        $sql_update_order="UPDATE `orders` SET order_status='$new_order_status',order_payment='$new_order_payment' WHERE order_id='$order_id'";
+        $sql_update_order="UPDATE `renthub_orders` SET order_status='$new_order_status',order_payment='$new_order_payment' WHERE order_id='$order_id'";
         $result_update_order = mysqli_query($conn,$sql_update_order);
         if ($result_update_order) {
             echo "<script>alert('Order updated successfully.'); window.location.href = 'orders.php?view';</script>";

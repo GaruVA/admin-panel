@@ -62,7 +62,7 @@
 if(isset($_POST["login"])) {
   $email=$_POST["email"];
   $conf_password=$_POST["password"];
-  $sql_select_user="SELECT * FROM `users` WHERE user_email='$email' && user_type='admin';";
+  $sql_select_user="SELECT * FROM `renthub_users` WHERE user_email='$email' && user_type='admin';";
   $result_select_user=mysqli_query($conn, $sql_select_user);
   if(mysqli_num_rows($result_select_user) > 0) {
     $row_select_user = mysqli_fetch_assoc($result_select_user);
@@ -78,6 +78,5 @@ if(isset($_POST["login"])) {
   }else{
     echo "<script>alert('Invalid Credentials')</script>";
   } 
-
 }
 ?>

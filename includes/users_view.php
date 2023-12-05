@@ -9,7 +9,7 @@
     </thead>
     <tbody>
         <?php
-            $sql_select_users = "SELECT * FROM `users`;";
+            $sql_select_users = "SELECT * FROM `renthub_users`;";
             $result_users = mysqli_query($conn, $sql_select_users);
 
             if (mysqli_num_rows($result_users) > 0) {
@@ -26,12 +26,7 @@
                             </td>
                         </tr>";
                 }
-            } /*else {
-                // Provide a message if there are no categories
-                echo "<tr>
-                        <td colspan='3'>No categories found.</td>
-                        </tr>";
-            }*/ 
+            }
         ?>
     </tbody>
 </table>

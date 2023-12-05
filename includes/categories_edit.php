@@ -2,7 +2,7 @@
 
     if(isset($_GET["edit"])) {
         $category_id = $_GET["edit"];
-        $sql_select_category = "SELECT * FROM `categories` WHERE category_id=$category_id;";
+        $sql_select_category = "SELECT * FROM `renthub_categories` WHERE category_id=$category_id;";
         $result_select_category = mysqli_query($conn,$sql_select_category);
         $row_select_category = mysqli_fetch_assoc($result_select_category);
         $category_name = $row_select_category["category_name"];
@@ -10,7 +10,7 @@
     if(isset($_POST["update"])){
         $new_category_name = $_POST["category_name"];
 
-        $sql_update_category = "UPDATE `categories` SET category_name='$new_category_name' WHERE category_id=$category_id;";
+        $sql_update_category = "UPDATE `renthub_categories` SET category_name='$new_category_name' WHERE category_id=$category_id;";
         $result_update_category = mysqli_query($conn, $sql_update_category);
         if ($result_update_category) {
             echo "<script>alert('Category updated successfully.'); window.location.href = 'categories.php?view';</script>";

@@ -63,7 +63,7 @@
             <i class="fa-solid fa-cart-shopping" style="color: #f4f0f0;"></i>
             <div class="cart-number">
               <?php
-                $sql_select_cart = "SELECT * FROM `cart` WHERE ip_address='$ip_address';";
+                $sql_select_cart = "SELECT * FROM `renthub_cart` WHERE ip_address='$ip_address';";
                 $result_select_cart = mysqli_query($conn, $sql_select_cart);
                 echo mysqli_num_rows($result_select_cart);
               ?>
@@ -196,7 +196,7 @@ if(isset($_POST['signup'])){
 
 
   //select query
-  $select_query="SELECT * FROM `users` WHERE user_email='$user_email'";
+  $select_query="SELECT * FROM `renthub_users` WHERE user_email='$user_email'";
   $result=mysqli_query($conn,$select_query);
   $rows_count=mysqli_num_rows($result);
   if($rows_count>0){
@@ -205,11 +205,11 @@ if(isset($_POST['signup'])){
     echo "<script>alert('Password does not match')</script>";
   }else{
     //insert_query
-    $insert_query="INSERT INTO `users` (user_firstname,user_lastname,user_email,user_password,user_address,user_address_state,user_address_city,user_contact,user_ip,user_type) VALUES ('$user_firstname','$user_lastname','$user_email','$user_password_hash','$user_address','$user_address_state','$user_address_city','$user_contact','$ip_address','user')";
+    $insert_query="INSERT INTO `renthub_users` (user_firstname,user_lastname,user_email,user_password,user_address,user_address_state,user_address_city,user_contact,user_ip,user_type) VALUES ('$user_firstname','$user_lastname','$user_email','$user_password_hash','$user_address','$user_address_state','$user_address_city','$user_contact','$ip_address','user')";
     $sql_execute=mysqli_query($conn,$insert_query);
     $_SESSION['user_email']=$user_email;
     echo "<script>alert('Signup Successful')</script>";
-    $sql_select_cart="SELECT * FROM `cart` WHERE ip_address='$ip_address'";
+    $sql_select_cart="SELECT * FROM `renthub_cart` WHERE ip_address='$ip_address'";
     $result_select_cart=mysqli_query($conn,$sql_select_cart);
     if(mysqli_num_rows($result_select_cart) > 0){
       echo "<script>alert('You have items in your cart')</script>";

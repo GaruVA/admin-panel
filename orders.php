@@ -115,9 +115,9 @@
                     }
                     if(isset($_GET['delete'])) {
                         $order_id = $_GET['delete'];
-                        $sql_delete_order = "DELETE FROM `orders` WHERE order_id=$order_id";
+                        $sql_delete_order = "DELETE FROM `renthub_orders` WHERE order_id=$order_id";
                         $result_delete_order = mysqli_query($conn,$sql_delete_order);
-                        $sql_delete_delivery = "DELETE FROM `delivery` WHERE order_id=$order_id";
+                        $sql_delete_delivery = "DELETE FROM `renthub_delivery` WHERE order_id=$order_id";
                         $result_delete_delivery = mysqli_query($conn,$sql_delete_delivery);
                         if($result_delete_order){
                             echo "<script>alert('Order deleted successfully')</script>";

@@ -73,7 +73,7 @@
             <i class="fa-solid fa-cart-shopping" style="color: #f4f0f0;"></i>
             <div class="cart-number">
               <?php
-                $sql_select_cart = "SELECT * FROM `cart` WHERE ip_address='$ip_address';";
+                $sql_select_cart = "SELECT * FROM `renthub_cart` WHERE ip_address='$ip_address';";
                 $result_select_cart = mysqli_query($conn, $sql_select_cart);
                 echo mysqli_num_rows($result_select_cart);
               ?>
@@ -104,14 +104,14 @@
                     <?php
                         $total_price = 0;
 
-                        $cart_query = "SELECT * FROM cart WHERE ip_address = '$ip_address'";
+                        $cart_query = "SELECT * FROM `renthub_cart` WHERE ip_address = '$ip_address'";
                         $result = mysqli_query($conn, $cart_query);
 
                         while ($row = mysqli_fetch_assoc($result)) {
                           $product_id = $row['product_id'];
                           $quantity = $row['quantity'];
 
-                          $product_query = "SELECT * FROM products WHERE product_id = '$product_id'";
+                          $product_query = "SELECT * FROM `renthub_products` WHERE product_id = '$product_id'";
                           $result_product = mysqli_query($conn, $product_query);
                           $row_product = mysqli_fetch_assoc($result_product);
                           $product_name = $row_product['product_name'];
@@ -136,7 +136,7 @@
                 <ul class="details">
                   <?php
                     $user_ip=getIPAddress();
-                    $sql_select_user="SELECT * FROM `users` WHERE user_ip='$user_ip'";
+                    $sql_select_user="SELECT * FROM `renthub_users` WHERE user_ip='$user_ip'";
                     $result_select_user = mysqli_query($conn, $sql_select_user);
                     $row_select_user = mysqli_fetch_assoc($result_select_user);
                     $user_firstname = $row_select_user["user_firstname"]; 
@@ -285,8 +285,5 @@
     <p class="text-center">Copyright @2023 - All Rights Reserved by RentHub</p>
 
   </footer>
-  
-
 </body>
-
 </html>

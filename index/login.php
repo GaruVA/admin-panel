@@ -64,7 +64,7 @@
             <i class="fa-solid fa-cart-shopping" style="color: #f4f0f0;"></i>
             <div class="cart-number">
               <?php
-                $sql_select_cart = "SELECT * FROM `cart` WHERE ip_address='$ip_address';";
+                $sql_select_cart = "SELECT * FROM `renthub_cart` WHERE ip_address='$ip_address';";
                 $result_select_cart = mysqli_query($conn, $sql_select_cart);
                 echo mysqli_num_rows($result_select_cart);
               ?>
@@ -172,7 +172,6 @@
   <p class="text-center">Copyright @2023 - All Rights Reserved by RentHub</p>
 
 </footer>-->
-<script src="login.js"></script>
 </body>
 </html>
 
@@ -181,7 +180,7 @@ if(isset($_POST["login"])) {
   $user_email=$_POST["user_email"];
   $conf_user_password=$_POST["conf_user_password"];
 
-  $sql_select_user="SELECT * FROM `users` WHERE user_email='$user_email';";
+  $sql_select_user="SELECT * FROM `renthub_users` WHERE user_email='$user_email';";
   $result_select_user=mysqli_query($conn, $sql_select_user);
   if(mysqli_num_rows($result_select_user) > 0) {
     $row_select_user = mysqli_fetch_assoc($result_select_user);
@@ -189,7 +188,7 @@ if(isset($_POST["login"])) {
     if(password_verify($conf_user_password, $password)) {
       $_SESSION['user_email']=$user_email;
       echo "<script>alert('Login Successful')</script>";
-      $sql_select_cart="SELECT * FROM `cart` WHERE ip_address='$ip_address'";
+      $sql_select_cart="SELECT * FROM `renthub_cart` WHERE ip_address='$ip_address'";
       $result_select_cart=mysqli_query($conn,$sql_select_cart);
       if(mysqli_num_rows($result_select_cart) > 0){
         echo "<script>alert('You have items in your cart')</script>";
