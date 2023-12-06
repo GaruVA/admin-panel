@@ -72,5 +72,5 @@
       $sql_insert_delivery = "INSERT INTO `renthub_delivery` (order_id,delivery_firstname,delivery_lastname,delivery_address,delivery_address_city,delivery_address_state,delivery_contact) VALUES ($order_id,'$firstname','$lastname','$address','$city','$state','$contact');";
       $result_update = mysqli_query($conn, $sql_insert_delivery);
     }
-    echo "<script>window.location.href = 'products.php'</script>";
+    echo "<script>window.location.href = 'index.php'</script>";
 ?>

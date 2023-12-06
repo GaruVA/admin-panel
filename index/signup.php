@@ -1,7 +1,7 @@
 <?php 
     session_start();
     if(isset($_SESSION['user_email'])) {
-      header("Location: products.php");
+      header("Location: user_area/index.php");
       exit();
     }
     include("admin_panel/includes/connection.php");
@@ -26,7 +26,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" href="img/1.png">
+<link rel="icon" href="icons/white.png">
 <title>Rent Hub | Sign Up</title>
 <!-- Use the correct Bootstrap and Popper.js versions -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -41,7 +41,7 @@
 <!-- navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
     <div class="container">
-      <a class="navbar-brand fs-4" href="#">
+      <a class="navbar-brand fs-4" href="index.php">
         <img src="icons/white.png" alt="" width="70">
       </a>
       <button class="navbar-toggler shadow-none border-0" type="button" data-bs-toggle="collapse"
@@ -50,10 +50,10 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarID">
         <ul class="navbar-nav mx-auto">
-          <li class="nav-item"><a class="nav-link active nav-center" aria-current="page" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link active nav-center" aria-current="page" href="index.php">Home</a></li>
           <li class="nav-item"><a class="nav-link nav-center" href="products.php">Products</a></li>
-          <li class="nav-item"><a class="nav-link nav-center" href="#">About</a></li>
-          <li class="nav-item"><a class="nav-link nav-center" href="Contact.html">Contact</a></li>
+          <li class="nav-item"><a class="nav-link nav-center" href="about.php">About</a></li>
+          <li class="nav-item"><a class="nav-link nav-center" href="contact.php">Contact</a></li>
         </ul>
         <div class="nav-link nav-center right">
           <form action="products.php" method="get">
@@ -215,7 +215,7 @@ if(isset($_POST['signup'])){
       echo "<script>alert('You have items in your cart')</script>";
       echo "<script>window.open('cart.php','_self')</script>";
     }else{
-      echo "<script>window.open('products.php', '_self')</script>";
+      echo "<script>window.open('user_area/index.php', '_self')</script>";
     }
   }
 }
