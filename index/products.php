@@ -119,7 +119,7 @@
                         $category_name = $category['category_name'];
 
                         
-                        $sql_select_products = "SELECT * FROM `renthub_products` WHERE category_id=$category_id;";
+                        $sql_select_products = "SELECT * FROM `renthub_products` WHERE category_id=$category_id && status='true';";
                         $result_products = mysqli_query($conn, $sql_select_products);
 
                         if (mysqli_num_rows($result_products) > 0) {

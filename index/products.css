@@ -270,10 +270,16 @@ a, a:hover {
   background-color: #00ADB5;
   color: black;
   cursor: pointer;
+  padding: 0;
 }
 
 .card .card__tagbox .blue.play label{
   cursor: pointer;
+  height: 40px;
+  min-width: 130px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .tag__item input {
