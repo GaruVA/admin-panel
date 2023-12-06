@@ -160,7 +160,7 @@
   <div class="row">
     <!-- DEMO 1 Item-->
     <div class="col-lg-4 mb-3 mb-lg-0">
-      <div class="hover hover-1 text-white rounded"><img src="Card img/IMG_3053 2.jpeg" alt="">
+      <div class="hover hover-1 text-white rounded"><img src="Card img/IMG_3071.jpg" alt="">
         <div class="hover-overlay"></div>
         <div class="hover-1-content px-5 py-4">
 
