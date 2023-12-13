@@ -297,3 +297,25 @@ flex-direction: column;
         width: 100%;
     }
 }
+
+
+@media (max-width: 375px) {
+    .sidebar.close{
+        width: 0px;
+        padding: 0;
+    }
+
+    .sidebar.close img {
+        display: none;
+    }
+
+    .sidebar.close header .toggle {
+        padding-top: 25px;
+        right: -45px;
+    }
+
+    .sidebar.close ~ .home{
+        left: 0 !important;
+        width: 100% !important;
+    }
+}
